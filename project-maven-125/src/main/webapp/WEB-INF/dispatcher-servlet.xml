@@ -11,11 +11,11 @@
 	<mvc:annotation-driven />	
 	<mvc:resources mapping="/assets/**" location="/assets/"/>
 	
-	<context:component-scan base-package="com.girinuaha.maven.controller"></context:component-scan>
+	<context:component-scan base-package="com.xsis.training125.controller"></context:component-scan>
 	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
-			<value>/WEB-INF/</value>
+			<value>/WEB-INF/jsp/</value>
 		</property>
 		<property name="suffix">
 			<value>.jsp</value>
