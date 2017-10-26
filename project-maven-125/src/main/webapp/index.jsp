@@ -1,5 +1,5 @@
 <html>
 <body>
-<h2>Library MASAlah</h2>
+<h2>Giri Nugraha</h2>
 </body>
 </html>
