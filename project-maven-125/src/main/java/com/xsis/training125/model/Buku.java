@@ -14,17 +14,15 @@ public class Buku {
 	private int id;
 	@Column(nullable=false)
 	private String isbn;
-	private String name;
 	private String title;
 	private String author;
 	
 	public Buku() { }
 	
-	public Buku(int id, String isbn, String name, String title, String author) {
+	public Buku(int id, String isbn, String title, String author) {
 		super();
 		this.id = id;
 		this.isbn = isbn;
-		this.name = name;
 		this.title = title;
 		this.author = author;
 	}
@@ -40,12 +38,6 @@ public class Buku {
 	}
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
 	}
 	public String getTitle() {
 		return title;
