@@ -11,12 +11,12 @@
 	<context:property-placeholder location="classpath:application.properties"/>
 	
 	<!-- sebagi penggati connection database -->
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 	    <property name="driverClassName" value="${spring.datasource.driverClassName}" />
 	    <property name="url" value="${spring.datasource.url}" />
 	    <property name="username" value="${spring.datasource.username}"/>
 	    <property name="password" value="${spring.datasource.password}"/>
-	</bean>
+	</bean> -->
 	
 	<!-- untuk load session hibernate -->
 	<bean  class="org.springframework.orm.hibernate5.LocalSessionFactoryBean" 
@@ -31,7 +31,7 @@
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
-				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+			<!-- 	<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop> -->
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate5.SpringSessionContext
 				</prop>
