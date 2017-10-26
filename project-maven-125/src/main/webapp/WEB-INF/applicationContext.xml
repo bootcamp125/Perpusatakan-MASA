@@ -18,10 +18,10 @@
 
 	<!-- sebagi penggati connection database oracle -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-		<property name="url" value="jdbc:oracle:thin:thin@localhost:1521:xe" />
-		<property name="username" value="javacode" />
-		<property name="password" value="1234" />
+	    <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+	    <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+	    <property name="username" value="javacode"/>
+	    <property name="password" value="1234"/>
 	</bean>
 
 	<!-- untuk load session hibernate -->
