@@ -5,14 +5,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class Address {
 
-	private String nama;
+	private String name;
 	private String postalCode;
 	
 	public String getName() {
-		return nama;
+		return name;
 	}
 	public void setName(String name) {
-		this.nama = name;
+		this.name = name;
 	}
 	public String getPostalCode() {
 		return postalCode;
