@@ -32,6 +32,9 @@
 			<list>
 				<value>com.xsis.training125.model.Employee</value>
 				<value>com.xsis.training125.model.Department</value>
+				<value>com.xsis.training125.model.Buku</value>
+				<value>com.xsis.training125.model.Penerbit</value>
+				<value>com.xsis.training125.model.History</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
