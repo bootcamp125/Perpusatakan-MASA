@@ -1,5 +1,5 @@
 <html>
 <body>
-<h2>Library MASAALLAH</h2>
+<h2>Library MASAlah</h2>
 </body>
 </html>
