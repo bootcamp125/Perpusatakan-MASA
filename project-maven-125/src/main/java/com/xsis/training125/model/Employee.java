@@ -16,24 +16,25 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "EMPLOYEE")
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class Employee {
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-    @Column(name="NAME", nullable=false)
+	@Column(name = "NAME", nullable = false)
 	private String name;
 	private String address;
-	@Column(unique=true)
+	@Column(unique = true)
 	private String email;
-	@Column(name="phone_number")
+	@Column(name = "phone_number")
 	private String phoneNumber;
-	@Column(name="birth_day")
+	@Column(name = "birth_day")
 	@Temporal(TemporalType.DATE)
 	private Date birthDay;
-	
-	public Employee() {}
-	
+
+	public Employee() {
+	}
+
 	public Employee(int id, String name, String address, String email, String phoneNumber, Date birthDay) {
 		super();
 		this.id = id;
@@ -91,5 +92,5 @@ public class Employee {
 	public void setBirthDay(Date birthDay) {
 		this.birthDay = birthDay;
 	}
-	
+
 }
