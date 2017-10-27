@@ -16,15 +16,17 @@ public class Buku {
 	private String isbn;
 	private String title;
 	private String author;
+	private String released_year;
 	
 	public Buku() { }
 	
-	public Buku(int id, String isbn, String title, String author) {
+	public Buku(int id, String isbn, String title, String author, String released_year) {
 		super();
 		this.id = id;
 		this.isbn = isbn;
 		this.title = title;
 		this.author = author;
+		this.released_year = released_year;
 	}
 	
 	public int getId() {
@@ -50,6 +52,12 @@ public class Buku {
 	}
 	public void setAuthor(String author) {
 		this.author = author;
+	}
+	public void setReleased_year(String released_year) {
+		this.released_year = released_year;
+	}
+	public String getReleased_year() {
+		return released_year;
 	}
 	
 }

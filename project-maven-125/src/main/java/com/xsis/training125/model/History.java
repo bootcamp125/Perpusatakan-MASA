@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class History {
@@ -15,8 +17,10 @@ public class History {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	@Column(name="borrow_date")
+	@Temporal(TemporalType.DATE)
 	private Date borrowDate;
 	@Column(name="return_date")
+	@Temporal(TemporalType.DATE)
 	private Date returnDate;
 	private int fine;
 	
