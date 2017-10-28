@@ -1,4 +1,4 @@
-<%@page import="com.xsis.training125.model.Buku"%>
+<%@page import="com.xsis.training125.model.Publisher"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -13,23 +13,23 @@
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <body>
 	<div class="container">
-		<form action="buku/save" method="POST">
+		<form action="publisher/save" method="POST">
 			<div class="form-row">
 			    <div class="form-group col-md-6">
-				    <label>ISBN : </label>
-				    <input type="text" class="form-control" name="isbn">
+				    <label>Name : </label>
+				    <input type="text" class="form-control" name="name">
 				</div>
 				<div class="form-group col-md-6">
-			    	<label>Title : </label>
-			    	<input class="form-control" type="text" name="title"></td>
+			    	<label>Address : </label>
+			    	<input class="form-control" type="text" name="address"></td>
 				</div>
 				<div class="form-group col-md-6">
-			    	<label>Author : </label>
-			    	<input type="text" class="form-control" name="author">
+			    	<label>Email : </label>
+			    	<input type="email" class="form-control" name="email">
 			  	</div>
 			  	<div class="form-group col-md-6">
-			    	<label>Released Year : </label>
-			    	<input type="text" class="form-control" name="released_year">
+			    	<label>Phone Number : </label>
+			    	<input type="text" class="form-control" name="phoneNumber">
 			  	</div>
 			</div>
 			<button type="submit" class="btn btn-primary">Save</button><br><br><br><br>
@@ -38,23 +38,23 @@
 		<table class="table table-striped table-bordered table-hover">
   			<thead class="thead-dark">
 				<tr>
-					<th>ISBN</th>
-					<th>Title</th>
-					<th>Author</th>
-					<th>Released Year</th>
+					<th>Name</th>
+					<th>Address</th>
+					<th>Email</th>
+					<th>Phone Number</th>
 					<th>Action</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="buku" items="${buku }">
+				<c:forEach var="publisher" items="${publisher }">
 					<tr>
-						<td>${buku.isbn }</td>
-						<td>${buku.title }</td>
-						<td>${buku.author }</td>
-						<td>${buku.released_year }</td>
+						<td>${publisher.name }</td>
+						<td>${publisher.address }</td>
+						<td>${publisher.email }</td>
+						<td>${publisher.phoneNumber }</td>
 						<td>
-							<button class="btn btn-warning btn-sm update-btn" data-id="${buku.id}">Update</button>
-							<button class="btn btn-danger btn-sm delete-btn" data-id="${buku.id}">Delete</button>
+							<button class="btn btn-warning btn-sm update-btn" data-id="${publisher.id}">Update</button>
+							<button class="btn btn-danger btn-sm delete-btn" data-id="${publisher.id}">Delete</button>
 						</td>
 					</tr>
 				</c:forEach>
@@ -71,6 +71,55 @@
 		
 		var id = 0;
 		
+		//update
+		$(document).ready(function (){
+			$('.update-btn').on('click',function() {
+				
+				id = $(this).data('id');
+				
+				//ajax retrive data
+				$.ajax({
+					type: 'POST',
+					url: '/publisher/edit/'+id,
+					success: function(data) {		
+						setField(data);
+					},
+					dataType: 'json'
+				});
+				
+				$('#updateModal').modal();
+			});
+			
+			function setField(data) {
+				$('#name').val(data.name);
+				$('#address').val(data.address);
+				$('#email').val(data.email);
+				$('#phoneNumber').val(data.phoneNumber);
+			}
+			
+			//submit update
+			$('#submit-update').click(function(){
+				var Publisher = {
+					id : id,
+					name : $('#name').val(),
+					address : $('#address').val(),
+					email : $('#email').val(),
+					phoneNumber : $('#phoneNumber').val()
+				};
+				
+				// ajax update
+				$.ajax({
+					type: 'PUT',
+					url: '/publisher/update',
+					contentType: "application/json",
+					data : JSON.stringify(Publisher),
+					success: function(data) {		
+						window.location = "/publisher";
+					}
+				});
+			});
+		});
+		
 		//delete
 		$(document).ready(function (){
 			
@@ -84,63 +133,55 @@
 				
 				$.ajax({
 					type: 'DELETE',
-					url: '/buku/delete/'+id,
+					url: '/publisher/delete/'+id,
 					success: function(data) {		
-						window.location = "/buku";
+						window.location = "/publisher";
 					}
 				});
 			});
 		});
 		
-		//update
-		$(document).ready(function (){
-			$('.update-btn').on('click',function() {
-				
-				id = $(this).data('id');
-				
-				//ajax retrive data
-				$.ajax({
-					type: 'POST',
-					url: '/buku/edit/'+id,
-					success: function(data) {		
-						setField(data);
-					},
-					dataType: 'json'
-				});
-				
-				$('#updateModal').modal();
-			});
-			
-			function setField(data) {
-				$('#isbn').val(data.isbn);
-				$('#title').val(data.title);
-				$('#author').val(data.author);
-				$('#released_year').val(data.released_year);
-			}
-			
-			//submit update
-			$('#submit-update').click(function(){
-				var Employee = {
-					id : id,
-					isbn : $('#isbn').val(),
-					title : $('#title').val(),
-					author : $('#author').val(),
-					released_year : $('#released_year').val()
-				};
-				
-				// ajax update
-				$.ajax({
-					type: 'PUT',
-					url: '/buku/update',
-					contentType: "application/json",
-					data : JSON.stringify(Employee),
-					success: function(data) {		
-						window.location = "/buku";
-					}
-				});
-			});
-		});
 	</script>
+	
+	<!-- Modal Update -->
+	<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Update Modal</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <form>
+				<div class="form-row">
+			    <div class="form-group col-md-6">
+				    <label>Name : </label>
+				    <input type="text" class="form-control" name="name" id="name">
+				</div>
+				<div class="form-group col-md-6">
+			    	<label>Address : </label>
+			    	<input class="form-control" type="text" name="address" id="address"></td>
+				</div>
+				<div class="form-group col-md-6">
+			    	<label>Email : </label>
+			    	<input type="email" class="form-control" name="email" id="email">
+			  	</div>
+			  	<div class="form-group col-md-6">
+			    	<label>Phone Number : </label>
+			    	<input type="text" class="form-control" name="phoneNumber" id="phoneNumber">
+			  	</div>
+			</div>
+			</form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary" id="submit-update">Save changes</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 	
 	<!-- Modal Delete -->
 	<div class="modal fade" id="deleteConfirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -158,46 +199,6 @@
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
 	        <button type="button" class="btn btn-primary" id="ok-delete">Yes</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	
-	<!-- Modal Update -->
-	<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">Update Modal</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	        <form>
-				<div class="form-row">
-			    <div class="form-group col-md-6">
-				    <label>ISBN : </label>
-				    <input type="text" class="form-control" name="isbn" id="isbn">
-				</div>
-				<div class="form-group col-md-6">
-			    	<label>Title : </label>
-			    	<input class="form-control" type="text" name="title" id="title"></td>
-				</div>
-				<div class="form-group col-md-6">
-			    	<label>Author : </label>
-			    	<input type="text" class="form-control" name="author" id="author">
-			  	</div>
-			  	<div class="form-group col-md-6">
-			    	<label>Released Year : </label>
-			    	<input type="text" class="form-control" name="released_year" id="released_year">
-			  	</div>
-			</div>
-			</form>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary" id="submit-update">Save changes</button>
 	      </div>
 	    </div>
 	  </div>

@@ -1,0 +1,207 @@
+<%@page import="com.xsis.training125.model.Book"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+	<link rel="stylesheet" href="/assets/bootstrap-4.0.0-beta.2/dist/css/bootstrap.css"/>
+	<link href="http://code.gijgo.com/1.5.1/css/gijgo.css" rel="stylesheet" type="text/css" />
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<body>
+	<div class="container">
+		<form action="buku/save" method="POST">
+			<div class="form-row">
+			    <div class="form-group col-md-6">
+				    <label>ISBN : </label>
+				    <input type="text" class="form-control" name="isbn">
+				</div>
+				<div class="form-group col-md-6">
+			    	<label>Title : </label>
+			    	<input class="form-control" type="text" name="title"></td>
+				</div>
+				<div class="form-group col-md-6">
+			    	<label>Author : </label>
+			    	<input type="text" class="form-control" name="author">
+			  	</div>
+			  	<div class="form-group col-md-6">
+			    	<label>Released Year : </label>
+			    	<input type="text" class="form-control" name="released_year">
+			  	</div>
+			</div>
+			<button type="submit" class="btn btn-primary">Save</button><br><br><br><br>
+		</form>
+		
+		<table class="table table-striped table-bordered table-hover">
+  			<thead class="thead-dark">
+				<tr>
+					<th>ISBN</th>
+					<th>Title</th>
+					<th>Author</th>
+					<th>Released Year</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="buku" items="${buku }">
+					<tr>
+						<td>${buku.isbn }</td>
+						<td>${buku.title }</td>
+						<td>${buku.author }</td>
+						<td>${buku.released_year }</td>
+						<td>
+							<button class="btn btn-warning btn-sm update-btn" data-id="${buku.id}">Update</button>
+							<button class="btn btn-danger btn-sm delete-btn" data-id="${buku.id}">Delete</button>
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+	
+	<script type="text/javascript" src="/assets/js/jquery-3.2.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="/assets/bootstrap-4.0.0-beta.2/dist/js/bootstrap.min.js"></script>
+	<script src="http://code.gijgo.com/1.5.1/js/gijgo.js" type="text/javascript"></script>
+	
+	<script type="text/javascript">
+		
+		var id = 0;
+		
+		//delete
+		$(document).ready(function (){
+			
+			$('.delete-btn').on('click',function() {
+				
+				id = $(this).data('id');
+				$('#deleteConfirmation').modal(id);
+			});
+			
+			$('#ok-delete').click(function(){
+				
+				$.ajax({
+					type: 'DELETE',
+					url: '/buku/delete/'+id,
+					success: function(data) {		
+						window.location = "/buku";
+					}
+				});
+			});
+		});
+		
+		//update
+		$(document).ready(function (){
+			$('.update-btn').on('click',function() {
+				
+				id = $(this).data('id');
+				
+				//ajax retrive data
+				$.ajax({
+					type: 'POST',
+					url: '/buku/edit/'+id,
+					success: function(data) {		
+						setField(data);
+					},
+					dataType: 'json'
+				});
+				
+				$('#updateModal').modal();
+			});
+			
+			function setField(data) {
+				$('#isbn').val(data.isbn);
+				$('#title').val(data.title);
+				$('#author').val(data.author);
+				$('#released_year').val(data.released_year);
+			}
+			
+			//submit update
+			$('#submit-update').click(function(){
+				var Book = {
+					id : id,
+					isbn : $('#isbn').val(),
+					title : $('#title').val(),
+					author : $('#author').val(),
+					released_year : $('#released_year').val()
+				};
+				
+				// ajax update
+				$.ajax({
+					type: 'PUT',
+					url: '/buku/update',
+					contentType: "application/json",
+					data : JSON.stringify(Book),
+					success: function(data) {		
+						window.location = "/buku";
+					}
+				});
+			});
+		});
+	</script>
+	
+	<!-- Modal Delete -->
+	<div class="modal fade" id="deleteConfirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Confirm Delete</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        Are you sure?
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+	        <button type="button" class="btn btn-primary" id="ok-delete">Yes</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+	<!-- Modal Update -->
+	<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Update Modal</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <form>
+				<div class="form-row">
+			    <div class="form-group col-md-6">
+				    <label>ISBN : </label>
+				    <input type="text" class="form-control" name="isbn" id="isbn">
+				</div>
+				<div class="form-group col-md-6">
+			    	<label>Title : </label>
+			    	<input class="form-control" type="text" name="title" id="title"></td>
+				</div>
+				<div class="form-group col-md-6">
+			    	<label>Author : </label>
+			    	<input type="text" class="form-control" name="author" id="author">
+			  	</div>
+			  	<div class="form-group col-md-6">
+			    	<label>Released Year : </label>
+			    	<input type="text" class="form-control" name="released_year" id="released_year">
+			  	</div>
+			</div>
+			</form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary" id="submit-update">Save changes</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+</body>
+</html>

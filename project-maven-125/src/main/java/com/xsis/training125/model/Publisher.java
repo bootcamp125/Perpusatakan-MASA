@@ -17,17 +17,18 @@ public class Publisher {
 	private String address;
 	@Column(unique=true)
 	private String email;
-	private String phone_number;
+	@Column(name="phone_number")
+	private String phoneNumber;
 	
 	public Publisher() { }
 
-	public Publisher(int id, String name, String address, String email, String phone_number) {
+	public Publisher(int id, String name, String address, String email, String phoneNumber) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.address = address;
 		this.email = email;
-		this.phone_number = phone_number;
+		this.phoneNumber = phoneNumber;
 	}
 
 	public int getId() {
@@ -62,12 +63,12 @@ public class Publisher {
 		this.email = email;
 	}
 
-	public String getPhone_number() {
-		return phone_number;
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
 
-	public void setPhone_number(String phone_number) {
-		this.phone_number = phone_number;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 }
