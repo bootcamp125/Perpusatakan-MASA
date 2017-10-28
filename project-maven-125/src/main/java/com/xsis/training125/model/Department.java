@@ -25,15 +25,7 @@ public class Department {
 	private String contact;
 	@Column(name="department_address")
 	private String departmentAddress;
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="department")
-	private List<Employee> employees;
-	 
-	public List<Employee> getEmployees() {
-		return employees;
-	}
-	public void setEmployees(List<Employee> employees) {
-		this.employees = employees;
-	}
+	
 	public int getId() {
 		return id;
 	}

@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+
 @Entity
 public class History {
 	
@@ -24,7 +25,9 @@ public class History {
 	private Date returnDate;
 	private int fine;
 	
-	public History() { }
+	public History() {
+		
+	}
 
 	public History(int id, Date borrowDate, Date returnDate, int fine) {
 		super();

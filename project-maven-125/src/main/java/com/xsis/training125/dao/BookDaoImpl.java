@@ -7,49 +7,49 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.xsis.training125.model.Buku;
+import com.xsis.training125.model.Book;
 
 @Repository
 @SuppressWarnings("unchecked")
-public class BukuDaoImpl implements BukuDao {
+public class BookDaoImpl implements BookDao {
 	
 	@Autowired
 	SessionFactory sessionFactory;
 	
-	public void save(Buku buku) {
+	public void save(Book book) {
 		Session session = sessionFactory.getCurrentSession();
-		session.save(buku);
+		session.save(book);
 		session.flush();
 	}
 	
-	public List<Buku> getAllBuku() {
+	public List<Book> getAllBook() {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "from Buku";
-		List<Buku> buku = session.createQuery(hql).list();
-		if (buku.isEmpty()) {
+		String hql = "from Book";
+		List<Book> book = session.createQuery(hql).list();
+		if (book.isEmpty()) {
 			return null;
 		}
-		return buku;
+		return book;
 	}
 	
-	public Buku getBukuById(int id) {
+	public Book getBookById(int id) {
 		Session session = sessionFactory.getCurrentSession();
-		Buku buku = session.get(Buku.class, id);
-		return buku;
+		Book book = session.get(Book.class, id);
+		return book;
 	}
 	
-	public void update(Buku buku) {
+	public void update(Book book) {
 		Session session = sessionFactory.getCurrentSession();
-		session.update(buku);
+		session.update(book);
 		session.flush();
 	}
 	
 	public void delete(int id) {
 		Session session = sessionFactory.getCurrentSession();
-		Buku buku = new Buku();
-		buku.setId(id);
-		buku.setIsbn("isbn");
-		session.delete(buku);
+		Book book = new Book();
+		book.setId(id);
+		book.setIsbn("isbn");
+		session.delete(book);
 		session.flush();
 	}
 }

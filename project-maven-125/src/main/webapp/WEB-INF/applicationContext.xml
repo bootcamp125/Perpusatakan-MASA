@@ -30,16 +30,18 @@
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="annotatedClasses">
 			<list>
+				<value>com.xsis.training125.model.Customer</value>
 				<value>com.xsis.training125.model.Employee</value>
 				<value>com.xsis.training125.model.Department</value>
-				<value>com.xsis.training125.model.Buku</value>
-				<value>com.xsis.training125.model.Penerbit</value>
+				<value>com.xsis.training125.model.Book</value>
+				<value>com.xsis.training125.model.Publisher</value>
 				<value>com.xsis.training125.model.History</value>
+				<value>com.xsis.training125.model.Shelf</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
 			<props>
-				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
 				<!-- <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop> -->
 				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>

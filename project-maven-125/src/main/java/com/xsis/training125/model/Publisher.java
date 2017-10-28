@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Penerbit {
+public class Publisher {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -19,9 +19,9 @@ public class Penerbit {
 	private String email;
 	private String phone_number;
 	
-	public Penerbit() { }
+	public Publisher() { }
 
-	public Penerbit(int id, String name, String address, String email, String phone_number) {
+	public Publisher(int id, String name, String address, String email, String phone_number) {
 		super();
 		this.id = id;
 		this.name = name;

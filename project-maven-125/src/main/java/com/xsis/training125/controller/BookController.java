@@ -14,45 +14,45 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.xsis.training125.model.Buku;
-import com.xsis.training125.service.BukuService;
+import com.xsis.training125.model.Book;
+import com.xsis.training125.service.BookService;
 
 @Controller
-@RequestMapping("/buku")
-public class BukuController {
+@RequestMapping("/book")
+public class BookController {
 	
 	@Autowired
-	BukuService bukuService;
+	BookService bookService;
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public String index(Model model) {
-		List<Buku> buku = bukuService.getAllBuku();
-		model.addAttribute("buku", buku);
-		return "buku";
+		List<Book> book = bookService.getAllBook();
+		model.addAttribute("book", book);
+		return "book";
 	}
 	
 	@RequestMapping(value="/save", method=RequestMethod.POST)
-	public String save(@ModelAttribute Buku buku) {
-		bukuService.save(buku);
-		return "redirect:/buku";
+	public String save(@ModelAttribute Book book) {
+		bookService.save(book);
+		return "redirect:/book";
 	}
 	
 	@RequestMapping(value="/edit/{id}")
 	@ResponseBody
-	public Buku getBukuById(@PathVariable int id) {
-		Buku result = bukuService.getBukuById(id);
+	public Book getbookById(@PathVariable int id) {
+		Book result = bookService.getBookById(id);
 		return result;
 	}
 	
 	@RequestMapping(value="/update", method=RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.OK)
-	public void update(@RequestBody Buku buku) {
-		bukuService.update(buku);
+	public void update(@RequestBody Book book) {
+		bookService.update(book);
 	}
 	
 	@RequestMapping(value="/delete/{id}", method = RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.OK)
 	public void delete(@PathVariable int id) {
-		bukuService.delete(id);
+		bookService.delete(id);
 	}
 }

@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Buku {
+public class Book {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -18,9 +18,9 @@ public class Buku {
 	private String author;
 	private String released_year;
 	
-	public Buku() { }
+	public Book() { }
 	
-	public Buku(int id, String isbn, String title, String author, String released_year) {
+	public Book(int id, String isbn, String title, String author, String released_year) {
 		super();
 		this.id = id;
 		this.isbn = isbn;
