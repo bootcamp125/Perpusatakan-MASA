@@ -13,7 +13,7 @@
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <body>
 	<div class="container">
-		<form action="buku/save" method="POST">
+		<form action="book/save" method="POST">
 			<div class="form-row">
 			    <div class="form-group col-md-6">
 				    <label>ISBN : </label>
@@ -46,15 +46,15 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="buku" items="${buku }">
+				<c:forEach var="book" items="${book }">
 					<tr>
-						<td>${buku.isbn }</td>
-						<td>${buku.title }</td>
-						<td>${buku.author }</td>
-						<td>${buku.released_year }</td>
+						<td>${book.isbn }</td>
+						<td>${book.title }</td>
+						<td>${book.author }</td>
+						<td>${book.released_year }</td>
 						<td>
-							<button class="btn btn-warning btn-sm update-btn" data-id="${buku.id}">Update</button>
-							<button class="btn btn-danger btn-sm delete-btn" data-id="${buku.id}">Delete</button>
+							<button class="btn btn-warning btn-sm update-btn" data-id="${book.id}">Update</button>
+							<button class="btn btn-danger btn-sm delete-btn" data-id="${book.id}">Delete</button>
 						</td>
 					</tr>
 				</c:forEach>
@@ -71,27 +71,6 @@
 		
 		var id = 0;
 		
-		//delete
-		$(document).ready(function (){
-			
-			$('.delete-btn').on('click',function() {
-				
-				id = $(this).data('id');
-				$('#deleteConfirmation').modal(id);
-			});
-			
-			$('#ok-delete').click(function(){
-				
-				$.ajax({
-					type: 'DELETE',
-					url: '/buku/delete/'+id,
-					success: function(data) {		
-						window.location = "/buku";
-					}
-				});
-			});
-		});
-		
 		//update
 		$(document).ready(function (){
 			$('.update-btn').on('click',function() {
@@ -101,7 +80,7 @@
 				//ajax retrive data
 				$.ajax({
 					type: 'POST',
-					url: '/buku/edit/'+id,
+					url: '/book/edit/'+id,
 					success: function(data) {		
 						setField(data);
 					},
@@ -131,37 +110,37 @@
 				// ajax update
 				$.ajax({
 					type: 'PUT',
-					url: '/buku/update',
+					url: '/book/update',
 					contentType: "application/json",
 					data : JSON.stringify(Book),
 					success: function(data) {		
-						window.location = "/buku";
+						window.location = "/book";
+					}
+				});
+			});
+		});
+		
+		//delete
+		$(document).ready(function (){
+			
+			$('.delete-btn').on('click',function() {
+				
+				id = $(this).data('id');
+				$('#deleteConfirmation').modal(id);
+			});
+			
+			$('#ok-delete').click(function(){
+				
+				$.ajax({
+					type: 'DELETE',
+					url: '/book/delete/'+id,
+					success: function(data) {		
+						window.location = "/book";
 					}
 				});
 			});
 		});
 	</script>
-	
-	<!-- Modal Delete -->
-	<div class="modal fade" id="deleteConfirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">Confirm Delete</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	        Are you sure?
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-	        <button type="button" class="btn btn-primary" id="ok-delete">Yes</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
 	
 	<!-- Modal Update -->
 	<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -198,6 +177,27 @@
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 	        <button type="button" class="btn btn-primary" id="submit-update">Save changes</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+	<!-- Modal Delete -->
+	<div class="modal fade" id="deleteConfirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Confirm Delete</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        Are you sure?
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+	        <button type="button" class="btn btn-primary" id="ok-delete">Yes</button>
 	      </div>
 	    </div>
 	  </div>
