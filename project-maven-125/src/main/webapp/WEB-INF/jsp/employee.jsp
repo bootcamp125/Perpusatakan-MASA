@@ -152,6 +152,7 @@
 				$('#address').val(data.address);
 				$('#email').val(data.email);
 				$('#phoneNumber').val(data.phoneNumber);
+				$('#birthDate').val(data.birthDate);
 			}
 
 			//event submit data for update
@@ -163,7 +164,8 @@
 					name : $('#name').val(),
 					address : $('#address').val(),
 					email : $('#email').val(),
-					phone_number : $('#phoneNumber').val()
+					phone_number : $('#phoneNumber').val(),
+					birth_date : $('#birthDate').val()
 				};
 
 				//ajax update
@@ -207,25 +209,26 @@
 								class="form-control" name="email" id="email" placeholder=" ">
 						</div>
 						<div class="form-group">
-							<label for="phoneNumber">Phone Number</label> <input type="text"
-								class="form-control" name="phoneNumber" id="phoneNumber"
-								placeholder=" "> <small id="phoneNumberHelp"
-								class="form-text text-muted">Example : 0818xxxx8181 or
-								021xxx2121</small>
+							<label for="phoneNumber">Phone Number</label> <input
+								type="number" class="form-control" name="phoneNumber"
+								id="phoneNumber" placeholder=" "> <small
+								id="phoneNumberHelp" class="form-text text-muted">Example
+								: 0818xxxx8181 or 021xxx2121</small>
 						</div>
 						<div class="form-group">
 							<label for="birthDate">Birth Date :</label> <input
 								class="form-control" id="birthDate" placeholder=" "
 								name="birthDate">
 						</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary" id="submit-update">Update</button>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary" id="submit-update">Update</button>
+				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 </body>
 </html>
