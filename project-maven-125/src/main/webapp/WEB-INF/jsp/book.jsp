@@ -16,20 +16,28 @@
 		<form action="book/save" method="POST">
 			<div class="form-row">
 			    <div class="form-group col-md-6">
-				    <label>ISBN : </label>
+				    <label>ISBN</label>
 				    <input type="text" class="form-control" name="isbn">
 				</div>
 				<div class="form-group col-md-6">
-			    	<label>Title : </label>
+			    	<label>Title</label>
 			    	<input class="form-control" type="text" name="title"></td>
 				</div>
 				<div class="form-group col-md-6">
-			    	<label>Author : </label>
+			    	<label>Author</label>
 			    	<input type="text" class="form-control" name="author">
 			  	</div>
 			  	<div class="form-group col-md-6">
-			    	<label>Released Year : </label>
-			    	<input type="text" class="form-control" name="released_year">
+			    	<label>Released Year</label>
+			    	<input type="text" class="form-control" name="releasedYear">
+			  	</div>
+			  	<div class="form-group col-md-6">
+			    	<label>Publisher</label>
+			    	<select class="form-control" name="publisher.id">
+			    		<c:forEach var="publisher" items="${publishers }">
+			    			<option value="${publisher.id }" label="${publisher.name }"/>
+			    		</c:forEach>
+			    	</select>
 			  	</div>
 			</div>
 			<button type="submit" class="btn btn-primary">Save</button><br><br><br><br>
@@ -42,16 +50,18 @@
 					<th>Title</th>
 					<th>Author</th>
 					<th>Released Year</th>
+					<th>Publisher</th>
 					<th>Action</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="book" items="${book }">
+				<c:forEach var="book" items="${books }">
 					<tr>
 						<td>${book.isbn }</td>
 						<td>${book.title }</td>
 						<td>${book.author }</td>
-						<td>${book.released_year }</td>
+						<td>${book.releasedYear }</td>
+						<td>${book.publisher.name }</td>
 						<td>
 							<button class="btn btn-warning btn-sm update-btn" data-id="${book.id}">Update</button>
 							<button class="btn btn-danger btn-sm delete-btn" data-id="${book.id}">Delete</button>
@@ -66,7 +76,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="/assets/bootstrap-4.0.0-beta.2/dist/js/bootstrap.min.js"></script>
 	<script src="http://code.gijgo.com/1.5.1/js/gijgo.js" type="text/javascript"></script>
-	
+		
 	<script type="text/javascript">
 		
 		var id = 0;
@@ -94,7 +104,8 @@
 				$('#isbn').val(data.isbn);
 				$('#title').val(data.title);
 				$('#author').val(data.author);
-				$('#released_year').val(data.released_year);
+				$('#releasedYear').val(data.releasedYear);
+				$('#publisher').val(data.publisher.id);
 			}
 			
 			//submit update
@@ -104,7 +115,8 @@
 					isbn : $('#isbn').val(),
 					title : $('#title').val(),
 					author : $('#author').val(),
-					released_year : $('#released_year').val()
+					releasedYear : $('#releasedYear').val(),
+					publisher : {id : $('#publisher').val()}
 				};
 				
 				// ajax update
@@ -156,20 +168,28 @@
 	        <form>
 				<div class="form-row">
 			    <div class="form-group col-md-6">
-				    <label>ISBN : </label>
+				    <label>ISBN</label>
 				    <input type="text" class="form-control" name="isbn" id="isbn">
 				</div>
 				<div class="form-group col-md-6">
-			    	<label>Title : </label>
+			    	<label>Title</label>
 			    	<input class="form-control" type="text" name="title" id="title"></td>
 				</div>
 				<div class="form-group col-md-6">
-			    	<label>Author : </label>
+			    	<label>Author</label>
 			    	<input type="text" class="form-control" name="author" id="author">
 			  	</div>
 			  	<div class="form-group col-md-6">
-			    	<label>Released Year : </label>
-			    	<input type="text" class="form-control" name="released_year" id="released_year">
+			    	<label>Released Year</label>
+			    	<input type="text" class="form-control" name="releasedYear" id="releasedYear">
+			  	</div>
+			  	<div class="form-group col-md-6">
+			    	<label>Publisher</label>
+			    	<select class="form-control" name="publisher" id="publisher">
+			    		<c:forEach var="publisher" items="${publishers }">
+			    			<option value="${publisher.id }" label="${publisher.name }"/>
+			    		</c:forEach>
+			    	</select>
 			  	</div>
 			</div>
 			</form>

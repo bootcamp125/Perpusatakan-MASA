@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.xsis.training125.model.Book;
+import com.xsis.training125.model.Publisher;
 import com.xsis.training125.service.BookService;
+import com.xsis.training125.service.PublisherService;
 
 @Controller
 @RequestMapping("/book")
@@ -23,11 +25,17 @@ public class BookController {
 	
 	@Autowired
 	BookService bookService;
+	@Autowired
+	PublisherService publisherService;
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public String index(Model model) {
-		List<Book> book = bookService.getAllBook();
-		model.addAttribute("book", book);
+		List<Book> books = bookService.getAllBook();
+		model.addAttribute("books", books);
+		
+		List<Publisher> publishers = publisherService.getAllPublisher();
+		model.addAttribute("publishers", publishers);
+		
 		return "book";
 	}
 	
