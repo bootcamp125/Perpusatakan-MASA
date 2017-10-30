@@ -1,15 +1,9 @@
 package com.xsis.training125.model;
 
-import java.util.Date;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
 
 @Entity
 public class History {
@@ -17,24 +11,24 @@ public class History {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
-	@Column(name="borrow_date")
-	@Temporal(TemporalType.DATE)
-	private Date borrowDate;
-	@Column(name="return_date")
-	@Temporal(TemporalType.DATE)
-	private Date returnDate;
-	private int fine;
+	private int id_peminjaman;
+	private int id_pengembalian;
+	private int id_peminjam;
+	private int id_karyawan;
+	private int id_transaksi;
 	
 	public History() {
 		
 	}
-
-	public History(int id, Date borrowDate, Date returnDate, int fine) {
+	
+	public History(int id, int id_peminjaman, int id_pengembalian, int id_peminjam, int id_karyawan, int id_transaksi) {
 		super();
 		this.id = id;
-		this.borrowDate = borrowDate;
-		this.returnDate = returnDate;
-		this.fine = fine;
+		this.id_peminjaman = id_peminjaman;
+		this.id_pengembalian = id_pengembalian;
+		this.id_peminjam = id_peminjam;
+		this.id_karyawan = id_karyawan;
+		this.id_transaksi = id_transaksi;
 	}
 
 	public int getId() {
@@ -45,27 +39,43 @@ public class History {
 		this.id = id;
 	}
 
-	public Date getBorrowDate() {
-		return borrowDate;
+	public int getId_peminjaman() {
+		return id_peminjaman;
 	}
 
-	public void setBorrowDate(Date borrowDate) {
-		this.borrowDate = borrowDate;
+	public void setId_peminjaman(int id_peminjaman) {
+		this.id_peminjaman = id_peminjaman;
 	}
 
-	public Date getReturnDate() {
-		return returnDate;
+	public int getId_pengembalian() {
+		return id_pengembalian;
 	}
 
-	public void setReturnDate(Date returnDate) {
-		this.returnDate = returnDate;
+	public void setId_pengembalian(int id_pengembalian) {
+		this.id_pengembalian = id_pengembalian;
 	}
 
-	public int getFine() {
-		return fine;
+	public int getId_peminjam() {
+		return id_peminjam;
 	}
 
-	public void setFine(int fine) {
-		this.fine = fine;
+	public void setId_peminjam(int id_peminjam) {
+		this.id_peminjam = id_peminjam;
+	}
+
+	public int getId_karyawan() {
+		return id_karyawan;
+	}
+
+	public void setId_karyawan(int id_karyawan) {
+		this.id_karyawan = id_karyawan;
+	}
+
+	public int getId_transaksi() {
+		return id_transaksi;
+	}
+
+	public void setId_transaksi(int id_transaksi) {
+		this.id_transaksi = id_transaksi;
 	}
 }

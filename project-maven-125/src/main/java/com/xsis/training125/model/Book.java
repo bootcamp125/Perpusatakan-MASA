@@ -16,48 +16,77 @@ public class Book {
 	private String isbn;
 	private String title;
 	private String author;
-	private String released_year;
+	private String releasedYear;
+	private Publisher publisher;
+	private Shelf shelf;
 	
 	public Book() { }
 	
-	public Book(int id, String isbn, String title, String author, String released_year) {
+	public Book(int id, String isbn, String title, String author, String releasedYear, Publisher publisher,
+			Shelf shelf) {
 		super();
 		this.id = id;
 		this.isbn = isbn;
 		this.title = title;
 		this.author = author;
-		this.released_year = released_year;
+		this.releasedYear = releasedYear;
+		this.publisher = publisher;
+		this.shelf = shelf;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}
+	
 	public String getIsbn() {
 		return isbn;
 	}
+	
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
+	
 	public String getTitle() {
 		return title;
 	}
+	
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	
 	public String getAuthor() {
 		return author;
 	}
+	
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-	public void setReleased_year(String released_year) {
-		this.released_year = released_year;
-	}
-	public String getReleased_year() {
-		return released_year;
+	
+	public void setReleasedYear(String releasedYear) {
+		this.releasedYear = releasedYear;
 	}
 	
+	public String getReleasedYear() {
+		return releasedYear;
+	}
+
+	public Publisher getPublisher() {
+		return publisher;
+	}
+
+	public void setPublisher(Publisher publisher) {
+		this.publisher = publisher;
+	}
+
+	public Shelf getShelf() {
+		return shelf;
+	}
+
+	public void setShelf(Shelf shelf) {
+		this.shelf = shelf;
+	}
 }
