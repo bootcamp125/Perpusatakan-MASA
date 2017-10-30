@@ -1,9 +1,13 @@
 package com.xsis.training125.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class History {
@@ -16,6 +20,12 @@ public class History {
 	private int id_peminjam;
 	private int id_karyawan;
 	private int id_transaksi;
+	
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="history")
+    private List<Employee> employees;
+	
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="history")
+	private List<Customer> customers;
 	
 	public History() {
 		
