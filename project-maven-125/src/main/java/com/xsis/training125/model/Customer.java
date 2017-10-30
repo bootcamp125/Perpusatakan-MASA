@@ -30,9 +30,9 @@ public class Customer {
 	private String email;
 	@Column(name = "phone_number")
 	private String phoneNumber;
-	@Column(name = "birth_day")
+	@Column(name = "birth_date")
 	@Temporal(TemporalType.DATE)
-	private Date birthDay;
+	private Date birthDate;
 
 	@ManyToOne
     @JoinColumn(name="id_history")
@@ -41,14 +41,14 @@ public class Customer {
 	public Customer() {
 	}
 
-	public Customer(int id, String name, String address, String email, String phoneNumber, Date birthDay) {
+	public Customer(int id, String name, String address, String email, String phoneNumber, Date birthDate) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.address = address;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
-		this.birthDay = birthDay;
+		this.birthDate = birthDate;
 	}
 
 	public int getId() {
@@ -91,12 +91,12 @@ public class Customer {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public Date getBirthDay() {
-		return birthDay;
+	public Date getBirthDate() {
+		return birthDate;
 	}
 
-	public void setBirthDay(Date birthDay) {
-		this.birthDay = birthDay;
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
 	}
 
 }
