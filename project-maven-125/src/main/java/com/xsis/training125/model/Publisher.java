@@ -1,10 +1,14 @@
 package com.xsis.training125.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Publisher {
@@ -19,6 +23,8 @@ public class Publisher {
 	private String email;
 	@Column(name="phone_number")
 	private String phoneNumber;
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="publisher")
+	private List<Book> book;
 	
 	public Publisher() { }
 

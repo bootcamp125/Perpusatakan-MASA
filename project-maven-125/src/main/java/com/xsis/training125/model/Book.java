@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Book {
@@ -16,8 +17,11 @@ public class Book {
 	private String isbn;
 	private String title;
 	private String author;
+	@Column(name="released_year")
 	private String releasedYear;
+	@ManyToOne
 	private Publisher publisher;
+	@ManyToOne
 	private Shelf shelf;
 	
 	public Book() { }

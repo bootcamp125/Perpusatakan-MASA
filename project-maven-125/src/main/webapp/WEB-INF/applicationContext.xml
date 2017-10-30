@@ -37,6 +37,9 @@
 				<value>com.xsis.training125.model.Publisher</value>
 				<value>com.xsis.training125.model.History</value>
 				<value>com.xsis.training125.model.Shelf</value>
+				<value>com.xsis.training125.model.BookStock</value>
+				<value>com.xsis.training125.model.BookTransaction</value>
+				<value>com.xsis.training125.model.BorrowTransaction</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
