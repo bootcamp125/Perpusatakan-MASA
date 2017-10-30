@@ -43,11 +43,12 @@ public class CustomerController {
 		return "redirect:/customer";
 	}
 
-	@RequestMapping(value = "/save2", method = RequestMethod.POST)
-	@ResponseStatus(HttpStatus.CREATED)
-	public void savingData2(@RequestBody Customer customer) {
-		customerService.save(customer);
-	}
+	/*
+	 * @RequestMapping(value = "/save2", method = RequestMethod.POST)
+	 * 
+	 * @ResponseStatus(HttpStatus.CREATED) public void savingData2(@RequestBody
+	 * Customer customer) { customerService.save(customer); }
+	 */
 
 	@RequestMapping(value = "/empid/{id}")
 	@ResponseBody
@@ -56,7 +57,7 @@ public class CustomerController {
 		return result;
 	}
 
-	@RequestMapping(value = "/update?data=apa", method = RequestMethod.PUT)
+	@RequestMapping(value = "/update", method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.OK)
 	public void updateCustomer(@RequestBody Customer customer) {
 		customerService.update(customer);
@@ -75,14 +76,14 @@ public class CustomerController {
 
 		return customers;
 	}
-	
+
 	@InitBinder
 	private void dateBinder(WebDataBinder binder) {
-	            //The date format to parse or output your dates
-	    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-	            //Create a new CustomDateEditor
-	    CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
-	            //Register it as custom editor for the Date type
-	    binder.registerCustomEditor(Date.class, editor);
+		// The date format to parse or output your dates
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		// Create a new CustomDateEditor
+		CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
+		// Register it as custom editor for the Date type
+		binder.registerCustomEditor(Date.class, editor);
 	}
 }

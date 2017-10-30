@@ -20,54 +20,48 @@ import com.xsis.training125.service.ShelfService;
 @Controller
 @RequestMapping("/shelf")
 public class ShelfController {
-	
+
 	@Autowired
 	ShelfService shelfService;
-	
-	@RequestMapping(method=RequestMethod.GET)
+
+	@RequestMapping(method = RequestMethod.GET)
 	public String index(Model model) {
-		
+
 		List<Shelf> shelfs = shelfService.getAllShelfs();
 		model.addAttribute("shelfs", shelfs);
 		return "shelf";
 	}
-	
-	@RequestMapping(value="/save", method=RequestMethod.POST)
-	public String savingData(@ModelAttribute Shelf shelf){
+
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	public String savingData(@ModelAttribute Shelf shelf) {
 		shelfService.save(shelf);
 		return "redirect:/shelf";
 	}
-	
-	@RequestMapping(value="/save2", method=RequestMethod.POST)
-	@ResponseStatus(HttpStatus.CREATED)
-	public void savingData2(@RequestBody Shelf shelf){
-		shelfService.save(shelf);
-	}
-	
-	@RequestMapping(value="/empid/{id}")
+
+	@RequestMapping(value = "/empid/{id}")
 	@ResponseBody
-	public Shelf getShelfById(@PathVariable int id){
+	public Shelf getShelfById(@PathVariable int id) {
 		Shelf result = shelfService.getShelfById(id);
-		 return result;
+		return result;
 	}
-	
-	@RequestMapping(value="/update?data=apa", method=RequestMethod.PUT)
+
+	@RequestMapping(value = "/update", method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.OK)
-	public void updateShelf(@RequestBody Shelf shelf){
+	public void updateShelf(@RequestBody Shelf shelf) {
 		shelfService.update(shelf);
 	}
-	
-	@RequestMapping(value="/delete/{id}", method=RequestMethod.DELETE)
+
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.OK)
-	public void delete(@PathVariable int id){
+	public void delete(@PathVariable int id) {
 		shelfService.delete(id);
 	}
 
-	@RequestMapping(value="/allemp", method=RequestMethod.GET)
+	@RequestMapping(value = "/allemp", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Shelf> getAllShelfs(){
+	public List<Shelf> getAllShelfs() {
 		List<Shelf> shelfs = shelfService.getAllShelfs();
-		
+
 		return shelfs;
 	}
 }

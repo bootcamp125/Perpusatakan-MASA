@@ -25,64 +25,65 @@ import com.xsis.training125.service.EmployeeService;
 @Controller
 @RequestMapping("/employee")
 public class EmployeeController {
-	//REST API -> @ResponseBody
+	// REST API -> @ResponseBody
 	@Autowired
 	EmployeeService employeeService;
 
-	@RequestMapping(method=RequestMethod.GET)
-	public String index(Model model){
-		
+	@RequestMapping(method = RequestMethod.GET)
+	public String index(Model model) {
+
 		List<Employee> employees = employeeService.getAllEmployees();
 		model.addAttribute("employees", employees);
 		return "employee";
 	}
-	
-	@RequestMapping(value="/save", method=RequestMethod.POST)
-	public String savingData(@ModelAttribute Employee employee){
+
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	public String savingData(@ModelAttribute Employee employee) {
 		employeeService.save(employee);
 		return "redirect:/employee";
 	}
-	
-	@RequestMapping(value="/save2", method=RequestMethod.POST)
-	@ResponseStatus(HttpStatus.CREATED)
-	public void savingData2(@RequestBody Employee employee){
-		employeeService.save(employee);
-	}
-	
-	@RequestMapping(value="/empid/{id}")
+
+	/*
+	 * @RequestMapping(value="/save2", method=RequestMethod.POST)
+	 * 
+	 * @ResponseStatus(HttpStatus.CREATED) public void savingData2(@RequestBody
+	 * Employee employee){ employeeService.save(employee); }
+	 */
+
+	@RequestMapping(value = "/empid/{id}")
 	@ResponseBody
-	public Employee getEmployeeById(@PathVariable int id){
-		 Employee result = employeeService.getEmployeeById(id);
-		 return result;
+	public Employee getEmployeeById(@PathVariable int id) {
+		Employee result = employeeService.getEmployeeById(id);
+		return result;
 	}
-	
-	@RequestMapping(value="/update?data=apa", method=RequestMethod.PUT)
+
+	@RequestMapping(value = "/update", method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.OK)
-	public void updateEmployee(@RequestBody Employee employee){
+	public void updateEmployee(@RequestBody Employee employee) {
 		employeeService.update(employee);
 	}
-	
-	@RequestMapping(value="/delete/{id}", method=RequestMethod.DELETE)
+
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.OK)
-	public void delete(@PathVariable int id){
+	public void delete(@PathVariable int id) {
 		employeeService.delete(id);
 	}
 
-	@RequestMapping(value="/allemp", method=RequestMethod.GET)
+	@RequestMapping(value = "/allemp", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Employee> getAllEmployees(){
+	public List<Employee> getAllEmployees() {
 		List<Employee> employees = employeeService.getAllEmployees();
-		
+
 		return employees;
 	}
-	
+
 	@InitBinder
 	private void dateBinder(WebDataBinder binder) {
-	            //The date format to parse or output your dates
-	    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-	            //Create a new CustomDateEditor
-	    CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
-	            //Register it as custom editor for the Date type
-	    binder.registerCustomEditor(Date.class, editor);
+		// The date format to parse or output your dates
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		// Create a new CustomDateEditor
+		CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
+		// Register it as custom editor for the Date type
+		binder.registerCustomEditor(Date.class, editor);
 	}
 }
