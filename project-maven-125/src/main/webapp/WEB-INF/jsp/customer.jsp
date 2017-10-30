@@ -75,53 +75,57 @@
 					</div>
 
 					<div class="container">
-						<div class="col-xs-4">
+						<div class="col-xs-3">
 							<div class="form-group phone-number">
 								<label class="control-label col-sm-2" for="phoneNumber">Phone
-							Number :</label>
+									Number :</label>
 								<div class="col-xs-3">
 									<input type="tel" name="phone" class="form-control" value=""
-										size="4" maxlength="4" required="required" title="">
+										size="4" maxlength="4" required="required" title=""
+										width="25%">
 								</div>
 
 								<div class="col-xs-3">
 									<input type="tel" name="phone" class="form-control" value=""
-										size="4" maxlength="4" required="required" title="">
+										size="4" maxlength="4" required="required" title=""
+										width="25%">
 								</div>
 
 
-								<div class="col-xs-4">
+								<div class="col-xs-3">
 									<input type="tel" name="phone" class="form-control" value=""
-										size="4" maxlength="4" required="required" title="">
+										size="4" maxlength="4" required="required" title=""
+										width="25%">
 								</div>
 							</div>
 						</div>
 					</div>
 
-					<div class="form-group">
+					<!-- <div class="form-group">
 						<label class="control-label col-sm-2" for="phoneNumber">Phone
 							Number :</label>
 						<div class="col-sm-6">
 							<input type="text" class="form-control" id="phoneNumber"
 								placeholder=" " name="phoneNumber">
 						</div>
+					</div> -->
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="phoneNumber">Birth
+							Date :</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" id="phoneNumber"
+								placeholder=" " name="phoneNumber">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<button type="submit" class="btn btn-default" name="submit"
+								value="save">Submit</button>
+						</div>
 					</div>
 				</div>
 			</form>
 		</div>
-
-		<tr>
-			<td>Birth Date</td>
-			<td>:</td>
-			<td><input type="text" name="birthDate" placeholder="" /></td>
-		</tr>
-		<tr>
-			<td>Submit</td>
-			<td></td>
-			<td><input type="submit" name="submit" value="save" /></td>
-		</tr>
-		</table>
-		</form>
 
 	</div>
 	<script type="text/javascript" src="/assets/js/jquery-3.2.1.min.js"></script>
