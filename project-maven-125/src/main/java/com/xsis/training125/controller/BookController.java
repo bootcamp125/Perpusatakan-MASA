@@ -22,43 +22,43 @@ import com.xsis.training125.service.PublisherService;
 @Controller
 @RequestMapping("/book")
 public class BookController {
-	
+
 	@Autowired
 	BookService bookService;
 	@Autowired
 	PublisherService publisherService;
-	
-	@RequestMapping(method=RequestMethod.GET)
+
+	@RequestMapping(method = RequestMethod.GET)
 	public String index(Model model) {
 		List<Book> books = bookService.getAllBook();
 		model.addAttribute("books", books);
-		
+
 		List<Publisher> publishers = publisherService.getAllPublisher();
 		model.addAttribute("publishers", publishers);
-		
+
 		return "book";
 	}
-	
-	@RequestMapping(value="/save", method=RequestMethod.POST)
+
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String save(@ModelAttribute Book book) {
 		bookService.save(book);
 		return "redirect:/book";
 	}
-	
-	@RequestMapping(value="/edit/{id}")
+
+	@RequestMapping(value = "/edit/{id}")
 	@ResponseBody
 	public Book getbookById(@PathVariable int id) {
 		Book result = bookService.getBookById(id);
 		return result;
 	}
-	
-	@RequestMapping(value="/update", method=RequestMethod.PUT)
+
+	@RequestMapping(value = "/update", method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.OK)
 	public void update(@RequestBody Book book) {
 		bookService.update(book);
 	}
-	
-	@RequestMapping(value="/delete/{id}", method = RequestMethod.DELETE)
+
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.OK)
 	public void delete(@PathVariable int id) {
 		bookService.delete(id);
