@@ -18,7 +18,9 @@ public class Shelf {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	@Column(name = "CATEGORY", nullable = false)
+	@Column(nullable = false)
+	private String section;
+	@Column(nullable = false)
 	private String category;
 	
 	public Shelf() {
