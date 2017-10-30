@@ -14,60 +14,60 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.xsis.training125.model.Employee;
-import com.xsis.training125.service.EmployeeService;
+import com.xsis.training125.model.Shelf;
+import com.xsis.training125.service.ShelfService;
 
 @Controller
-@RequestMapping("/employee")
-public class EmployeeController {
-	//REST API -> @ResponseBody
+@RequestMapping("/shelf")
+public class ShelfController {
+	
 	@Autowired
-	EmployeeService employeeService;
-
+	ShelfService shelfService;
+	
 	@RequestMapping(method=RequestMethod.GET)
-	public String index(Model model){
+	public String index(Model model) {
 		
-		List<Employee> employees = employeeService.getAllEmployees();
-		model.addAttribute("employees", employees);
-		return "employee";
+		List<Shelf> shelfs = shelfService.getAllShelfs();
+		model.addAttribute("shelfs", shelfs);
+		return "shelf";
 	}
 	
 	@RequestMapping(value="/save", method=RequestMethod.POST)
-	public String savingData(@ModelAttribute Employee employee){
-		employeeService.save(employee);
-		return "redirect:/employee";
+	public String savingData(@ModelAttribute Shelf shelf){
+		shelfService.save(shelf);
+		return "redirect:/shelf";
 	}
 	
 	@RequestMapping(value="/save2", method=RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
-	public void savingData2(@RequestBody Employee employee){
-		employeeService.save(employee);
+	public void savingData2(@RequestBody Shelf shelf){
+		shelfService.save(shelf);
 	}
 	
 	@RequestMapping(value="/empid/{id}")
 	@ResponseBody
-	public Employee getEmployeeById(@PathVariable int id){
-		 Employee result = employeeService.getEmployeeById(id);
+	public Shelf getShelfById(@PathVariable int id){
+		Shelf result = shelfService.getShelfById(id);
 		 return result;
 	}
 	
 	@RequestMapping(value="/update?data=apa", method=RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.OK)
-	public void updateEmployee(@RequestBody Employee employee){
-		employeeService.update(employee);
+	public void updateShelf(@RequestBody Shelf shelf){
+		shelfService.update(shelf);
 	}
 	
 	@RequestMapping(value="/delete/{id}", method=RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.OK)
 	public void delete(@PathVariable int id){
-		employeeService.delete(id);
+		shelfService.delete(id);
 	}
 
 	@RequestMapping(value="/allemp", method=RequestMethod.GET)
 	@ResponseBody
-	public List<Employee> getAllEmployees(){
-		List<Employee> employees = employeeService.getAllEmployees();
+	public List<Shelf> getAllShelfs(){
+		List<Shelf> shelfs = shelfService.getAllShelfs();
 		
-		return employees;
+		return shelfs;
 	}
 }
