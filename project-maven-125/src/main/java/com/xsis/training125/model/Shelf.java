@@ -19,17 +19,17 @@ public class Shelf {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	@Column(nullable = false)
-	private String section;
-	@Column(nullable = false)
 	private String category;
+	private String section;
 	
 	public Shelf() {
 	}
 
-	public Shelf(int id, String category) {
+	public Shelf(int id, String category, String section) {
 		super();
 		this.id = id;
 		this.category = category;
+		this.section = section;
 	}
 
 	public int getId() {
@@ -46,6 +46,14 @@ public class Shelf {
 
 	public void setCategory(String category) {
 		this.category = category;
+	}
+
+	public String getSection() {
+		return section;
+	}
+
+	public void setSection(String section) {
+		this.section = section;
 	}
 	
 }
