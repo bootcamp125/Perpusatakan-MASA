@@ -1,11 +1,16 @@
 package com.xsis.training125.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -69,5 +74,15 @@ public class CustomerController {
 		List<Customer> customers = customerService.getAllCustomers();
 
 		return customers;
+	}
+	
+	@InitBinder
+	private void dateBinder(WebDataBinder binder) {
+	            //The date format to parse or output your dates
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+	            //Create a new CustomDateEditor
+	    CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
+	            //Register it as custom editor for the Date type
+	    binder.registerCustomEditor(Date.class, editor);
 	}
 }

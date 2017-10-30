@@ -23,7 +23,7 @@ public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	@Column(name = "NAME", nullable = false)
+	@Column(name = "NAME", nullable = false) 
 	private String name;
 	private String address;
 	@Column(unique = true)
