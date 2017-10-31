@@ -8,7 +8,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
-public class History {
+public class RentHistory {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -20,11 +20,11 @@ public class History {
 	@ManyToOne
 	private Customer customer;
 		
-	public History() {
+	public RentHistory() {
 		
 	}
 	
-	public History(int id, BorrowTransaction borrow, ReturnTransaction bookReturn, Customer customer) {
+	public RentHistory(int id, BorrowTransaction borrow, ReturnTransaction bookReturn, Customer customer) {
 		super();
 		this.id = id;
 		this.borrow = borrow;

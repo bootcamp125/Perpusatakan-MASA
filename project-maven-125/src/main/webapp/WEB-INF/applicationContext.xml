@@ -34,7 +34,7 @@
 				<value>com.xsis.training125.model.Employee</value>
 				<value>com.xsis.training125.model.Book</value>
 				<value>com.xsis.training125.model.Publisher</value>
-				<value>com.xsis.training125.model.History</value>
+				<value>com.xsis.training125.model.RentHistory</value>
 				<value>com.xsis.training125.model.Shelf</value>
 				<value>com.xsis.training125.model.BookStock</value>
 				<value>com.xsis.training125.model.BookTransaction</value>

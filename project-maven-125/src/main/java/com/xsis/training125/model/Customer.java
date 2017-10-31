@@ -33,13 +33,13 @@ public class Customer {
 	@Temporal(TemporalType.DATE)
 	private Date birthDate;
 	@OneToMany(mappedBy="customer")
-    private List<History> history;
+    private List<RentHistory> rentHistory;
 	
 	public Customer() {
 	}
 
 	public Customer(int id, String name, String address, String email, String phoneNumber, Date birthDate,
-			List<History> history) {
+			List<RentHistory> rentHistory) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -47,7 +47,7 @@ public class Customer {
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.birthDate = birthDate;
-		this.history = history;
+		this.rentHistory = rentHistory;
 	}
 
 	public int getId() {
@@ -98,11 +98,11 @@ public class Customer {
 		this.birthDate = birthDate;
 	}
 
-	public List<History> getHistory() {
-		return history;
+	public List<RentHistory> getHistory() {
+		return rentHistory;
 	}
 
-	public void setHistory(List<History> history) {
-		this.history = history;
+	public void setHistory(List<RentHistory> rentHistory) {
+		this.rentHistory = rentHistory;
 	}
 }
