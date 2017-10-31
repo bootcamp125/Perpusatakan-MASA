@@ -10,7 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Publisher {
 	
 	@Id
@@ -28,13 +32,14 @@ public class Publisher {
 	
 	public Publisher() { }
 
-	public Publisher(int id, String name, String address, String email, String phoneNumber) {
+	public Publisher(int id, String name, String address, String email, String phoneNumber, List<Book> book) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.address = address;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
+		this.book = book;
 	}
 
 	public int getId() {
@@ -77,4 +82,11 @@ public class Publisher {
 		this.phoneNumber = phoneNumber;
 	}
 
+	public List<Book> getBook() {
+		return book;
+	}
+
+	public void setBook(List<Book> book) {
+		this.book = book;
+	}
 }

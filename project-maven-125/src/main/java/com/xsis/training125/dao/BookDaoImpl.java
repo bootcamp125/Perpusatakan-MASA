@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.xsis.training125.model.Book;
+import com.xsis.training125.model.BookStock;
 
 @Repository
 @SuppressWarnings("unchecked")
@@ -18,7 +19,11 @@ public class BookDaoImpl implements BookDao {
 	
 	public void save(Book book) {
 		Session session = sessionFactory.getCurrentSession();
-		session.save(book);
+		int id = (int) session.save(book);
+		book.setId(id);
+		BookStock stock = new BookStock();
+		stock.setBook(book);
+		session.save(stock);
 		session.flush();
 	}
 	

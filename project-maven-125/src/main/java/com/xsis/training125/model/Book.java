@@ -6,8 +6,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Book {
 	
 	@Id
@@ -23,11 +28,13 @@ public class Book {
 	private Publisher publisher;
 	@ManyToOne
 	private Shelf shelf;
+	@OneToOne(mappedBy="book")
+	private BookStock stock;
 	
 	public Book() { }
 	
-	public Book(int id, String isbn, String title, String author, String releasedYear, Publisher publisher,
-			Shelf shelf) {
+	public Book(int id, String isbn, String title, String author, String releasedYear, Publisher publisher, Shelf shelf,
+			BookStock stock) {
 		super();
 		this.id = id;
 		this.isbn = isbn;
@@ -36,6 +43,7 @@ public class Book {
 		this.releasedYear = releasedYear;
 		this.publisher = publisher;
 		this.shelf = shelf;
+		this.stock = stock;
 	}
 
 	public int getId() {
@@ -92,5 +100,13 @@ public class Book {
 
 	public void setShelf(Shelf shelf) {
 		this.shelf = shelf;
+	}
+
+	public BookStock getStock() {
+		return stock;
+	}
+
+	public void setStock(BookStock stock) {
+		this.stock = stock;
 	}
 }

@@ -1,4 +1,4 @@
-<%@page import="com.xsis.training125.model.Book"%>
+<%@page import="com.xsis.training125.model.BookStock"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -13,29 +13,13 @@
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <body>
 	<div class="container">
-		<form action="book/save" method="POST">
+		<form action="bookstock/save" method="POST">
 			<div class="form-row">
-			    <div class="form-group col-md-6">
-				    <label>ISBN</label>
-				    <input type="text" class="form-control" name="isbn">
-				</div>
-				<div class="form-group col-md-6">
-			    	<label>Title</label>
-			    	<input class="form-control" type="text" name="title"></td>
-				</div>
-				<div class="form-group col-md-6">
-			    	<label>Author</label>
-			    	<input type="text" class="form-control" name="author">
-			  	</div>
 			  	<div class="form-group col-md-6">
-			    	<label>Released Year</label>
-			    	<input type="text" class="form-control" name="releasedYear">
-			  	</div>
-			  	<div class="form-group col-md-6">
-			    	<label>Publisher</label>
-			    	<select class="form-control" name="publisher.id">
-			    		<c:forEach var="publisher" items="${publishers }">
-			    			<option value="${publisher.id }" label="${publisher.name }"/>
+			    	<label>Book</label>
+			    	<select class="form-control" name="book.id">
+			    		<c:forEach var="book" items="${books }">
+			    			<option value="${book.id }" label="${book.title }"/>
 			    		</c:forEach>
 			    	</select>
 			  	</div>
@@ -55,7 +39,6 @@
 					<th>Author</th>
 					<th>Released Year</th>
 					<th>Publisher</th>
-					<th>Stock</th>
 					<th>Action</th>
 				</tr>
 			</thead>
@@ -67,7 +50,6 @@
 						<td>${book.author }</td>
 						<td>${book.releasedYear }</td>
 						<td>${book.publisher.name }</td>
-						<td>${book.stock.stock }</td>
 						<td>
 							<button class="btn btn-warning btn-sm update-btn" data-id="${book.id}">Update</button>
 							<button class="btn btn-danger btn-sm delete-btn" data-id="${book.id}">Delete</button>
