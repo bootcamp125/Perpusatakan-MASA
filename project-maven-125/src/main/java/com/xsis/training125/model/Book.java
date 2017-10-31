@@ -29,13 +29,13 @@ public class Book {
 	@ManyToOne
 	private Shelf shelf;
 	@OneToOne(mappedBy="book")
-	private BookStock stock;
+	private BookStock bookStock;
 	@ManyToOne
 	private BookTransaction transaction;
 	public Book() { }
-	
+
 	public Book(int id, String isbn, String title, String author, String releasedYear, Publisher publisher, Shelf shelf,
-			BookStock stock) {
+			BookStock bookStock, BookTransaction transaction) {
 		super();
 		this.id = id;
 		this.isbn = isbn;
@@ -44,7 +44,8 @@ public class Book {
 		this.releasedYear = releasedYear;
 		this.publisher = publisher;
 		this.shelf = shelf;
-		this.stock = stock;
+		this.bookStock = bookStock;
+		this.transaction = transaction;
 	}
 
 	public int getId() {
@@ -103,11 +104,19 @@ public class Book {
 		this.shelf = shelf;
 	}
 
-	public BookStock getStock() {
-		return stock;
+	public BookStock getBookStock() {
+		return bookStock;
 	}
 
-	public void setStock(BookStock stock) {
-		this.stock = stock;
+	public void setBookStock(BookStock bookStock) {
+		this.bookStock = bookStock;
+	}
+
+	public BookTransaction getTransaction() {
+		return transaction;
+	}
+
+	public void setTransaction(BookTransaction transaction) {
+		this.transaction = transaction;
 	}
 }

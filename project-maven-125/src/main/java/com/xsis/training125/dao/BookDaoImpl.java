@@ -21,9 +21,12 @@ public class BookDaoImpl implements BookDao {
 		Session session = sessionFactory.getCurrentSession();
 		int id = (int) session.save(book);
 		book.setId(id);
-		BookStock stock = new BookStock();
-		stock.setBook(book);
-		session.save(stock);
+		
+		BookStock bookStock = new BookStock();
+		bookStock.setBook(book);
+		bookStock.setStock(book.getBookStock().getStock());
+		
+		session.save(bookStock);
 		session.flush();
 	}
 	
