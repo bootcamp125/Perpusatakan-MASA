@@ -1,4 +1,4 @@
-<%@page import="com.xsis.training125.model.Employee"%>
+<%@page import="com.xsis.training125.model.Shelf"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -8,85 +8,54 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Library MASA Customer Entry</title>
+<title>Library MASA Shelf Entry</title>
 <link rel="stylesheet"
 	href="/assets/bootstrap-4.0.0-beta.2/dist/css/bootstrap.min.css" />
 </head>
 <body>
 	<div class="container" id="container">
 		<%
-			/* List<Employee> employees = //(List)request.getAttribute("employees");		
-			for(Employee employee: employees){
-				out.println("name : "+ employee.getName());
+			/* List<Shelf> shelfs = //(List)request.getAttribute("shelfs");		
+			for(Shelf shelf: shelfs){
+				out.println("name : "+ shelf.getName());
 			} */
 		%>
 		<table class="table table-sm table-striped table-bordered table-hover">
 			<thead class="thead-dark">
 				<tr>
-					<th>Name</th>
-					<th>Address</th>
-					<th>Email</th>
-					<th>Phone Number</th>
-					<th>Birth Date</th>
+					<th>Category</th>
+					<th>Section</th>
 					<th>Action</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="employee" items="${employees }">
+				<c:forEach var="shelf" items="${shelfs }">
 					<tr>
-						<td>${employee.name }</td>
-						<td>${employee.address }</td>
-						<td>${employee.email }</td>
-						<td>${employee.phoneNumber }</td>
-						<td>${employee.birthDate }</td>
-						<td><a data-id="${employee.id }"
+						<td>${shelf.category }</td>
+						<td>${shelf.section }</td>
+						<td><a data-id="${shelf.id }"
 							class="btn btn-outline-danger delete-btn">Delete</a> <a
-							id="${employee.id }" class="btn btn-outline-warning update-btn">Update</a></td>
+							id="${shelf.id }" class="btn btn-outline-warning update-btn">Update</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 
-		<form action="/employee/save" method="POST">
-			<h2>Employee Entry</h2>
+		<form action="shelf/save" method="POST">
+			<h2>Shelf Entry</h2>
 			<div class="form-group row">
-				<label class="control-label col-sm-2" for="name">Name :</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="name" placeholder=" "
-						name="name">
+				<label class="control-label col-sm-2" for="category">Category :</label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control" id="category" placeholder=" "
+						name="category">
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="control-label col-sm-2" for="address">Address
+				<label class="control-label col-sm-2" for="section">Section
 					:</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="address"
-						placeholder=" " name="address">
-				</div>
-			</div>
-			<div class="form-group row">
-				<label class="control-label col-sm-2" for="email">Email :</label>
-				<div class="col-sm-4">
-					<input type="email" class="form-control" id="email" placeholder=" "
-						name="email">
-				</div>
-			</div>
-			<div class="form-group row">
-				<label class="control-label col-sm-2" for="phoneNumber">Phone
-					Number :</label>
-				<div class="col-sm-4">
-					<input type="number" class="form-control" id="phoneNumber"
-						placeholder=" " name="phoneNumber"> <small
-						id="phoneNumberHelp" class="form-text text-muted">Example
-						: 0818xxxx8181 or 021xxx2121</small>
-				</div>
-			</div>
-			<div class="form-group row">
-				<label class="control-label col-sm-2" for="birthDate">Birth
-					Date :</label>
-				<div class="col-sm-4">
-					<input type="date" class="form-control" id="birthDate"
-						placeholder=" " name="birthDate">
+				<div class="col-sm-3">
+					<input type="text" class="form-control" id="section"
+						placeholder=" " name="section">
 				</div>
 			</div>
 			<div class="form-group row">
@@ -117,9 +86,9 @@
 
 				$.ajax({
 					type : 'POST',
-					url : '/employee/empid/' + id,
+					url : 'shelf/empid/' + id,
 					success : function(data) {
-						//console.log(JSON.stringify(data));
+						console.log(JSON.stringify(data));
 						_setFieldUpdateModal(data);
 					},
 					dataType : 'json'
@@ -129,34 +98,29 @@
 			});
 
 			function _setFieldUpdateModal(data) {
-				$('#modname').val(data.name);
-				$('#modaddress').val(data.address);
-				$('#modemail').val(data.email);
-				$('#modphoneNumber').val(data.phoneNumber);
-				$('#modbirthDate').val(data.birthDate);
+				$('#modcategory').val(data.category);
+				$('#modsection').val(data.section);
+
 			}
 
 			//event submit data for update
 			$('#submit-update').click(function() {
 
 				//Object ala js
-				var Employee = {
+				var Shelf = {
 					id : id,
-					name : $('#modname').val(),
-					address : $('#modaddress').val(),
-					email : $('#modemail').val(),
-					phoneNumber : $('#modphoneNumber').val(),
-					birthDate : $('#modbirthDate').val()
+					category : $('#modcategory').val(),
+					section : $('#modsection').val(),
 				};
 
 				//ajax update
 				$.ajax({
 					type : 'PUT',
-					url : '/employee/update',
+					url : 'shelf/update',
 					contentType : "application/json",
-					data : JSON.stringify(Employee),
+					data : JSON.stringify(Shelf),
 					success : function(data) {
-						window.location = "/employee";
+						window.location = "/shelf";
 					}
 				});
 			});
@@ -175,9 +139,9 @@
 
 				$.ajax({
 					type : 'DELETE',
-					url : 'employee/delete/' + id,
+					url : 'shelf/delete/' + id,
 					success : function(data) {
-						window.location = "/employee";
+						window.location = "/shelf";
 					}
 				});
 			});
@@ -199,31 +163,14 @@
 				<div class="modal-body">
 					<form>
 						<div class="form-group">
-							<label for="modname">Name</label> <input type="text"
-								class="form-control" id="modname" name="modname" placeholder=" ">
+							<label for="modcategory">Category</label> <input type="text"
+								class="form-control" id="modcategory" name="modcategory" placeholder=" ">
 							<!-- <small id="nameHelp" class="form-text text-muted">Silahkan anda mengisi nama dengan benar</small> -->
 						</div>
 						<div class="form-group">
-							<label for="modaddress">Address</label> <input type="text"
-								class="form-control" id="modaddress" name="modaddress"
+							<label for="modsection">Section</label> <input type="text"
+								class="form-control" id="modsection" name="modsection"
 								placeholder=" ">
-						</div>
-						<div class="form-group">
-							<label for="modemail">Email</label> <input type="email"
-								class="form-control" name="modemail" id="modemail"
-								placeholder=" ">
-						</div>
-						<div class="form-group">
-							<label for="modphoneNumber">Phone Number</label> <input
-								type="number" class="form-control" name="modphoneNumber"
-								id="modphoneNumber" placeholder=" "> <small
-								id="phoneNumberHelp" class="form-text text-muted">Example
-								: 0818xxxx8181 or 021xxx2121</small>
-						</div>
-						<div class="form-group">
-							<label for="modbirthDate">Birth Date :</label> <input type="date"
-								class="form-control" id="modbirthDate" placeholder=" "
-								name="modbirthDate">
 						</div>
 					</form>
 				</div>
