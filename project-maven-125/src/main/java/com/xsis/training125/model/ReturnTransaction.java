@@ -24,7 +24,6 @@ public class ReturnTransaction {
 	private int id;
 	@Temporal(TemporalType.DATE)
 	private Date returnDate;
-	private int fine;
 	@ManyToOne
 	private Employee employee;
 	@OneToOne(mappedBy="bookReturn")
@@ -32,11 +31,10 @@ public class ReturnTransaction {
 	
 	public ReturnTransaction() {}
 
-	public ReturnTransaction(int id, Date returnDate, int fine, Employee employee, History history) {
+	public ReturnTransaction(int id, Date returnDate, Employee employee, History history) {
 		super();
 		this.id = id;
 		this.returnDate = returnDate;
-		this.fine = fine;
 		this.employee = employee;
 		this.history = history;
 	}
@@ -55,14 +53,6 @@ public class ReturnTransaction {
 
 	public void setReturnDate(Date returnDate) {
 		this.returnDate = returnDate;
-	}
-
-	public int getFine() {
-		return fine;
-	}
-
-	public void setFine(int fine) {
-		this.fine = fine;
 	}
 
 	public Employee getEmployee() {

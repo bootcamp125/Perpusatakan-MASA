@@ -115,7 +115,7 @@
 
 				$.ajax({
 					type : 'POST',
-					url : 'customer/empid/' + id,
+					url : 'customer/edit/' + id,
 					success : function(data) {
 						console.log(JSON.stringify(data));
 						_setFieldUpdateModal(data);

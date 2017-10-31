@@ -95,7 +95,7 @@
 
 				$.ajax({
 					type : 'POST',
-					url : 'shelf/empid/' + id,
+					url : 'shelf/edit/' + id,
 					success : function(data) {
 						console.log(JSON.stringify(data));
 						_setFieldUpdateModal(data);

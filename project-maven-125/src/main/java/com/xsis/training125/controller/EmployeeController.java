@@ -50,7 +50,7 @@ public class EmployeeController {
 	 * Employee employee){ employeeService.save(employee); }
 	 */
 
-	@RequestMapping(value = "/empid/{id}")
+	@RequestMapping(value = "/edit/{id}")
 	@ResponseBody
 	public Employee getEmployeeById(@PathVariable int id) {
 		Employee result = employeeService.getEmployeeById(id);

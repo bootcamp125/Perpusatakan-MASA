@@ -50,7 +50,7 @@ public class CustomerController {
 	 * Customer customer) { customerService.save(customer); }
 	 */
 
-	@RequestMapping(value = "/empid/{id}")
+	@RequestMapping(value = "/edit/{id}")
 	@ResponseBody
 	public Customer getCustomerById(@PathVariable int id) {
 		Customer result = customerService.getCustomerById(id);

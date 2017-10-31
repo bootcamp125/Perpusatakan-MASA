@@ -19,7 +19,7 @@ import com.xsis.training125.service.ShelfService;
 
 @Controller
 @RequestMapping("/shelf")
-public class ShelfController {
+public class ReturnTransactionController {
 
 	@Autowired
 	ShelfService shelfService;
