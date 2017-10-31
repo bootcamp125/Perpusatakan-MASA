@@ -32,7 +32,6 @@
 			<list>
 				<value>com.xsis.training125.model.Customer</value>
 				<value>com.xsis.training125.model.Employee</value>
-				<value>com.xsis.training125.model.Department</value>
 				<value>com.xsis.training125.model.Book</value>
 				<value>com.xsis.training125.model.Publisher</value>
 				<value>com.xsis.training125.model.History</value>
@@ -40,6 +39,7 @@
 				<value>com.xsis.training125.model.BookStock</value>
 				<value>com.xsis.training125.model.BookTransaction</value>
 				<value>com.xsis.training125.model.BorrowTransaction</value>
+				<value>com.xsis.training125.model.ReturnTransaction</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

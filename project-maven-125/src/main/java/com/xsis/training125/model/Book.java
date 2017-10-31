@@ -30,7 +30,8 @@ public class Book {
 	private Shelf shelf;
 	@OneToOne(mappedBy="book")
 	private BookStock stock;
-	
+	@ManyToOne
+	private BookTransaction transaction;
 	public Book() { }
 	
 	public Book(int id, String isbn, String title, String author, String releasedYear, Publisher publisher, Shelf shelf,

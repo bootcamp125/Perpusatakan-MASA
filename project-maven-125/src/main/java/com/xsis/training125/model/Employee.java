@@ -1,15 +1,15 @@
 package com.xsis.training125.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -17,7 +17,6 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@Table(name = "EMPLOYEE")
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class Employee {
 	@Id
@@ -33,15 +32,18 @@ public class Employee {
 	@Column(name = "birth_date")
 	@Temporal(TemporalType.DATE)
 	private Date birthDate;
-	
+	@OneToMany(mappedBy="employee")
+	private List<BorrowTransaction> borrow;
+	@OneToMany(mappedBy="employee")
+	private List<ReturnTransaction> bookReturn;
 	@ManyToOne
-    @JoinColumn(name="id_history")
     private History history;
 
 	public Employee() {
 	}
 
-	public Employee(int id, String name, String address, String email, String phoneNumber, Date birthDate) {
+	public Employee(int id, String name, String address, String email, String phoneNumber, Date birthDate,
+			List<BorrowTransaction> borrow, List<ReturnTransaction> bookReturn, History history) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -49,6 +51,9 @@ public class Employee {
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.birthDate = birthDate;
+		this.borrow = borrow;
+		this.bookReturn = bookReturn;
+		this.history = history;
 	}
 
 	public int getId() {
@@ -99,4 +104,27 @@ public class Employee {
 		this.birthDate = birthDate;
 	}
 
+	public List<BorrowTransaction> getBorrow() {
+		return borrow;
+	}
+
+	public void setBorrow(List<BorrowTransaction> borrow) {
+		this.borrow = borrow;
+	}
+
+	public List<ReturnTransaction> getBookReturn() {
+		return bookReturn;
+	}
+
+	public void setBookReturn(List<ReturnTransaction> bookReturn) {
+		this.bookReturn = bookReturn;
+	}
+
+	public History getHistory() {
+		return history;
+	}
+
+	public void setHistory(History history) {
+		this.history = history;
+	}
 }

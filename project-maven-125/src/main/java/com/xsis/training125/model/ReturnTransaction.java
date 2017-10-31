@@ -2,17 +2,38 @@ package com.xsis.training125.model;
 
 import java.util.Date;
 
-public class ReturnTransaction {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+@Entity
+public class ReturnTransaction {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
+	@Temporal(TemporalType.DATE)
 	private Date returnDate;
+	private int fine;
+	@ManyToOne
+	private Employee employee;
+	@OneToOne(mappedBy="bookReturn")
+	private History history;
 	
 	public ReturnTransaction() {}
 
-	public ReturnTransaction(int id, Date returnDate) {
+	public ReturnTransaction(int id, Date returnDate, int fine, Employee employee, History history) {
 		super();
 		this.id = id;
 		this.returnDate = returnDate;
+		this.fine = fine;
+		this.employee = employee;
+		this.history = history;
 	}
 
 	public int getId() {
@@ -30,6 +51,28 @@ public class ReturnTransaction {
 	public void setReturnDate(Date returnDate) {
 		this.returnDate = returnDate;
 	}
-	
-	
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
+	public History getHistory() {
+		return history;
+	}
+
+	public void setHistory(History history) {
+		this.history = history;
+	}
+
+	public int getFine() {
+		return fine;
+	}
+
+	public void setFine(int fine) {
+		this.fine = fine;
+	}
 }

@@ -1,13 +1,11 @@
 package com.xsis.training125.model;
 
-import java.util.List;
-
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class History {
@@ -15,30 +13,23 @@ public class History {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
-	private int id_peminjaman;
-	private int id_pengembalian;
-	private int id_peminjam;
-	private int id_karyawan;
-	private int id_transaksi;
-	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="history")
-    private List<Employee> employees;
-	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="history")
-	private List<Customer> customers;
-	
+	@OneToOne
+	private BorrowTransaction borrow;
+	@OneToOne
+	private ReturnTransaction bookReturn;
+	@ManyToOne
+	private Customer customer;
+		
 	public History() {
 		
 	}
 	
-	public History(int id, int id_peminjaman, int id_pengembalian, int id_peminjam, int id_karyawan, int id_transaksi) {
+	public History(int id, BorrowTransaction borrow, ReturnTransaction bookReturn, Customer customer) {
 		super();
 		this.id = id;
-		this.id_peminjaman = id_peminjaman;
-		this.id_pengembalian = id_pengembalian;
-		this.id_peminjam = id_peminjam;
-		this.id_karyawan = id_karyawan;
-		this.id_transaksi = id_transaksi;
+		this.borrow = borrow;
+		this.bookReturn = bookReturn;
+		this.customer = customer;
 	}
 
 	public int getId() {
@@ -49,43 +40,27 @@ public class History {
 		this.id = id;
 	}
 
-	public int getId_peminjaman() {
-		return id_peminjaman;
+	public BorrowTransaction getBorrow() {
+		return borrow;
 	}
 
-	public void setId_peminjaman(int id_peminjaman) {
-		this.id_peminjaman = id_peminjaman;
+	public void setBorrow(BorrowTransaction borrow) {
+		this.borrow = borrow;
 	}
 
-	public int getId_pengembalian() {
-		return id_pengembalian;
+	public ReturnTransaction getBookReturn() {
+		return bookReturn;
 	}
 
-	public void setId_pengembalian(int id_pengembalian) {
-		this.id_pengembalian = id_pengembalian;
+	public void setBookReturn(ReturnTransaction bookReturn) {
+		this.bookReturn = bookReturn;
 	}
 
-	public int getId_peminjam() {
-		return id_peminjam;
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	public void setId_peminjam(int id_peminjam) {
-		this.id_peminjam = id_peminjam;
-	}
-
-	public int getId_karyawan() {
-		return id_karyawan;
-	}
-
-	public void setId_karyawan(int id_karyawan) {
-		this.id_karyawan = id_karyawan;
-	}
-
-	public int getId_transaksi() {
-		return id_transaksi;
-	}
-
-	public void setId_transaksi(int id_transaksi) {
-		this.id_transaksi = id_transaksi;
-	}
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}	
 }
