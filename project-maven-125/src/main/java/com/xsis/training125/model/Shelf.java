@@ -20,15 +20,17 @@ public class Shelf {
 	private int id;
 	@Column(nullable = false)
 	private String category;
+	private String subcategory;
 	private String section;
 	
 	public Shelf() {
 	}
 
-	public Shelf(int id, String category, String section) {
+	public Shelf(int id, String category, String subcategory, String section) {
 		super();
 		this.id = id;
 		this.category = category;
+		this.subcategory = subcategory;
 		this.section = section;
 	}
 
@@ -48,6 +50,14 @@ public class Shelf {
 		this.category = category;
 	}
 
+	public String getSubcategory() {
+		return subcategory;
+	}
+
+	public void setSubcategory(String subcategory) {
+		this.subcategory = subcategory;
+	}
+
 	public String getSection() {
 		return section;
 	}
@@ -55,5 +65,5 @@ public class Shelf {
 	public void setSection(String section) {
 		this.section = section;
 	}
-	
+
 }

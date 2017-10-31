@@ -24,6 +24,7 @@
 			<thead class="thead-dark">
 				<tr>
 					<th>Category</th>
+					<th>Sub-category</th>
 					<th>Section</th>
 					<th>Action</th>
 				</tr>
@@ -32,6 +33,7 @@
 				<c:forEach var="shelf" items="${shelfs }">
 					<tr>
 						<td>${shelf.category }</td>
+						<td>${shelf.subcategory }</td>
 						<td>${shelf.section }</td>
 						<td><a data-id="${shelf.id }"
 							class="btn btn-outline-danger delete-btn">Delete</a> <a
@@ -48,6 +50,13 @@
 				<div class="col-sm-3">
 					<input type="text" class="form-control" id="category" placeholder=" "
 						name="category">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="control-label col-sm-2" for="subcategory">Sub-category :</label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control" id="subcategory" placeholder=" "
+						name="subcategory">
 				</div>
 			</div>
 			<div class="form-group row">
@@ -99,6 +108,7 @@
 
 			function _setFieldUpdateModal(data) {
 				$('#modcategory').val(data.category);
+				$('#modsubcategory').val(data.category);
 				$('#modsection').val(data.section);
 
 			}
@@ -110,6 +120,7 @@
 				var Shelf = {
 					id : id,
 					category : $('#modcategory').val(),
+					subcategory : $('#modsubcategory').val(),
 					section : $('#modsection').val(),
 				};
 
@@ -165,6 +176,11 @@
 						<div class="form-group">
 							<label for="modcategory">Category</label> <input type="text"
 								class="form-control" id="modcategory" name="modcategory" placeholder=" ">
+							<!-- <small id="nameHelp" class="form-text text-muted">Silahkan anda mengisi nama dengan benar</small> -->
+						</div>
+						<div class="form-group">
+							<label for="modsubcategory">Sub-category</label> <input type="text"
+								class="form-control" id="modsubcategory" name="modsubcategory" placeholder=" ">
 							<!-- <small id="nameHelp" class="form-text text-muted">Silahkan anda mengisi nama dengan benar</small> -->
 						</div>
 						<div class="form-group">
