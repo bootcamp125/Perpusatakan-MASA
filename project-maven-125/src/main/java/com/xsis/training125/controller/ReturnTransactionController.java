@@ -13,24 +13,24 @@ import com.xsis.training125.service.ReturnTransactionService;
 
 
 @Controller
-@RequestMapping("/returntransaction")
+@RequestMapping("/returnTransaction")
 public class ReturnTransactionController {
 
 	@Autowired
-	ReturnTransactionService returntransactionService;
+	ReturnTransactionService returnTransactionService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(Model model) {
 
-		List<ReturnTransaction> returntransactions = returntransactionService.getAllReturnTransactions();
-		model.addAttribute("returntransactions", returntransactions);
-		return "returntransaction";
+		List<ReturnTransaction> returnTransactions = returnTransactionService.getAllReturnTransactions();
+		model.addAttribute("returnTransactions", returnTransactions);
+		return "returnTransaction";
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String savingData(@ModelAttribute ReturnTransaction returntransaction) {
-		returntransactionService.save(returntransaction);
-		return "redirect:/returntransaction";
+	public String savingData(@ModelAttribute ReturnTransaction returnTransaction) {
+		returnTransactionService.save(returnTransaction);
+		return "redirect:/returnTransaction";
 	}
 
 }

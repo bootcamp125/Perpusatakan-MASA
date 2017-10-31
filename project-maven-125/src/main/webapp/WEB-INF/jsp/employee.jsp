@@ -8,7 +8,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Library MASA Customer Entry</title>
+<title>Library MASA Employee Entry</title>
+<script type="text/javascript" src="/assets/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript"
+		src="/assets/bootstrap-4.0.0-beta.2/dist/js/bootstrap.min.js"></script>
 <link rel="stylesheet"
 	href="/assets/bootstrap-4.0.0-beta.2/dist/css/bootstrap.min.css" />
 </head>
@@ -47,7 +50,7 @@
 			</tbody>
 		</table>
 
-		<form action="/employee/save" method="POST">
+		<form action="employee/save" method="POST">
 			<h2>Employee Entry</h2>
 			<div class="form-group row">
 				<label class="control-label col-sm-2" for="name">Name :</label>
@@ -76,17 +79,15 @@
 					Number :</label>
 				<div class="col-sm-4">
 					<input type="number" class="form-control" id="phoneNumber"
-						placeholder=" " name="phoneNumber"> <small
-						id="phoneNumberHelp" class="form-text text-muted">Example
-						: 0818xxxx8181 or 021xxx2121</small>
+						placeholder=" " name="phoneNumber">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="control-label col-sm-2" for="birthDate">Birth
 					Date :</label>
 				<div class="col-sm-4">
-					<input type="date" class="form-control" id="birthDate"
-						placeholder=" " name="birthDate">
+					<input type="date" min="1920-12-31" class="form-control"
+						id="birthDate" placeholder=" " name="birthDate">
 				</div>
 			</div>
 			<div class="form-group row">
@@ -115,11 +116,11 @@
 				//ambil data dari server => ajax
 				id = $(this).attr('id');
 
-				$.ajax({
+				$.ajax({	
 					type : 'POST',
-					url : '/employee/edit/' + id,
+					url : 'employee/edit/' + id,
 					success : function(data) {
-						//console.log(JSON.stringify(data));
+						console.log(JSON.stringify(data));
 						_setFieldUpdateModal(data);
 					},
 					dataType : 'json'
@@ -152,7 +153,7 @@
 				//ajax update
 				$.ajax({
 					type : 'PUT',
-					url : '/employee/update',
+					url : 'employee/update',
 					contentType : "application/json",
 					data : JSON.stringify(Employee),
 					success : function(data) {
@@ -222,8 +223,8 @@
 						</div>
 						<div class="form-group">
 							<label for="modbirthDate">Birth Date :</label> <input type="date"
-								class="form-control" id="modbirthDate" placeholder=" "
-								name="modbirthDate">
+								min="1920-12-31" class="form-control" id="modbirthDate"
+								placeholder=" " name="modbirthDate">
 						</div>
 					</form>
 				</div>

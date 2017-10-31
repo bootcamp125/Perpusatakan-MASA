@@ -17,14 +17,14 @@ public class ReturnTransactionService {
 	@Autowired
 	EmployeeDao employeeDao;
 	@Autowired
-	ReturnTransactionDao returntransactionDao;
+	ReturnTransactionDao returnTransactionDao;
 
-	public void save(ReturnTransaction returntransaction) {
-		returntransactionDao.save(returntransaction);
+	public void save(ReturnTransaction returnTransaction) {
+		returnTransactionDao.save(returnTransaction);
 	}
 
 	public List<ReturnTransaction> getAllReturnTransactions() {
-		return returntransactionDao.getAllReturnTransactions();
+		return returnTransactionDao.getAllReturnTransactions();
 	}
 
 }

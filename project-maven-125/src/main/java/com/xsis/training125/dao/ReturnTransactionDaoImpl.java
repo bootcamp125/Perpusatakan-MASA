@@ -15,11 +15,11 @@ public class ReturnTransactionDaoImpl implements ReturnTransactionDao{
 	@Autowired
 	SessionFactory sessionFactory;
 	
-	public void save(ReturnTransaction returntransaction) {
+	public void save(ReturnTransaction returnTransaction) {
 		// TODO Auto-generated method stub
 		
 		Session session = sessionFactory.getCurrentSession();
-		session.save(returntransaction);
+		session.save(returnTransaction);
 		session.flush();
 	}
 
@@ -29,36 +29,36 @@ public class ReturnTransactionDaoImpl implements ReturnTransactionDao{
 		
 		// HQL (hibernate query language)
 		String myHql = "from ReturnTransaction";
-		List<ReturnTransaction> returntransactions = session.createQuery(myHql).list();
-		if(returntransactions.isEmpty()){
+		List<ReturnTransaction> returnTransactions = session.createQuery(myHql).list();
+		if(returnTransactions.isEmpty()){
 			return null;
 		}
 		
-		return returntransactions;
+		return returnTransactions;
 	}
 
 	public ReturnTransaction getReturnTransactionById(int id) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
 		
-		ReturnTransaction returntransaction = session.get(ReturnTransaction.class, id);
-		return returntransaction;
+		ReturnTransaction returnTransaction = session.get(ReturnTransaction.class, id);
+		return returnTransaction;
 	}
 
-	public void update(ReturnTransaction returntransaction) {
+	public void update(ReturnTransaction returnTransaction) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
-		session.update(returntransaction);
+		session.update(returnTransaction);
 		session.flush();
 	}
 
 	public void delete(int id) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
-		ReturnTransaction returntransaction = new ReturnTransaction();
-		returntransaction.setId(id);
+		ReturnTransaction returnTransaction = new ReturnTransaction();
+		returnTransaction.setId(id);
 		
-		session.delete(returntransaction);
+		session.delete(returnTransaction);
 		session.flush();
 	}
 

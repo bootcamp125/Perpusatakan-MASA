@@ -1,4 +1,4 @@
-<%@page import="com.xsis.training125.model.Customer"%>
+<%@page import="com.xsis.training125.model.ReturnTransaction"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -8,86 +8,50 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Library MASA Customer Entry</title>
-<script type="text/javascript" src="/assets/js/jquery-3.2.1.min.js"></script>
-<script type="text/javascript"
-		src="/assets/bootstrap-4.0.0-beta.2/dist/js/bootstrap.min.js"></script>
+<title>Library MASA Return Transaction</title>
 <link rel="stylesheet"
 	href="/assets/bootstrap-4.0.0-beta.2/dist/css/bootstrap.min.css" />
 </head>
 <body>
 	<div class="container" id="container">
-		<%
-			/* List<Customer> customers = //(List)request.getAttribute("customers");		
-			for(Customer customer: customers){
-				out.println("name : "+ customer.getName());
-			} */
-		%>
+
 		<table class="table table-sm table-striped table-bordered table-hover">
 			<thead class="thead-dark">
 				<tr>
-					<th>Name</th>
-					<th>Address</th>
-					<th>Email</th>
-					<th>Phone Number</th>
-					<th>Birth Date</th>
+					<th>Employee</th>
+					<th>Return Date</th>
 					<th>Action</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="customer" items="${customers }">
+				<c:forEach var="returnTransaction" items="${returnTransactions }">
 					<tr>
-						<td>${customer.name }</td>
-						<td>${customer.address }</td>
-						<td>${customer.email }</td>
-						<td>${customer.phoneNumber }</td>
-						<td>${customer.birthDate }</td>
-						<td><a data-id="${customer.id }"
+						<td>${returnTransaction.employee.name }</td>
+						<td>${returnTransaction.returnDate }</td>
+						<td><a data-id="${returnTransaction.id }"
 							class="btn btn-outline-danger delete-btn">Delete</a> <a
-							id="${customer.id }" class="btn btn-outline-warning update-btn">Update</a></td>
+							id="${returnTransaction.id }" class="btn btn-outline-warning update-btn">Update</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 
-		<form action="customer/save" method="POST">
-			<h2>Customer Entry</h2>
+		<form action="returnTransaction/save" method="POST">
+			<h2>Return Transaction</h2>
 			<div class="form-group row">
-				<label class="control-label col-sm-2" for="name">Name :</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="name" placeholder=" "
-						name="name">
-				</div>
+				<label class="control-label col-sm-2" for="employee">Employee
+					:</label> <select class="form-control" name="employee.id">
+					<c:forEach var="employee" items="${employees }">
+						<option value="${employee.id }" label="${employee.name }" />
+					</c:forEach>
+				</select>
 			</div>
 			<div class="form-group row">
-				<label class="control-label col-sm-2" for="address">Address
-					:</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="address"
-						placeholder=" " name="address">
-				</div>
-			</div>
-			<div class="form-group row">
-				<label class="control-label col-sm-2" for="email">Email :</label>
-				<div class="col-sm-4">
-					<input type="email" class="form-control" id="email" placeholder=" "
-						name="email">
-				</div>
-			</div>
-			<div class="form-group row">
-				<label class="control-label col-sm-2" for="phoneNumber">Phone
-					Number :</label>
-				<div class="col-sm-4">
-					<input type="number" class="form-control" id="phoneNumber"
-						placeholder=" " name="phoneNumber">
-				</div>
-			</div>
-			<div class="form-group row">
-				<label class="control-label col-sm-2" for="birthDate">Birth
+				<label class="control-label col-sm-2" for="returnDate">Return
 					Date :</label>
-				<div class="col-sm-4">
-					<input type="date" min="1920-12-31" class="form-control"
-						id="birthDate" placeholder=" " name="birthDate">
+				<div class="col-sm-3">
+					<input type="date" class="form-control" id="returnDate"
+						placeholder=" " name="returnDate">
 				</div>
 			</div>
 			<div class="form-group row">
@@ -116,9 +80,9 @@
 				//ambil data dari server => ajax
 				id = $(this).attr('id');
 
-				$.ajax({	
+				$.ajax({
 					type : 'POST',
-					url : 'customer/edit/' + id,
+					url : 'returnTransaction/edit/' + id,
 					success : function(data) {
 						console.log(JSON.stringify(data));
 						_setFieldUpdateModal(data);
@@ -130,34 +94,31 @@
 			});
 
 			function _setFieldUpdateModal(data) {
-				$('#modname').val(data.name);
-				$('#modaddress').val(data.address);
-				$('#modemail').val(data.email);
-				$('#modphoneNumber').val(data.phoneNumber);
-				$('#modbirthDate').val(data.birthDate);
+				$('#modcategory').val(data.category);
+				$('#modsubcategory').val(data.category);
+				$('#modsection').val(data.section);
+
 			}
 
 			//event submit data for update
 			$('#submit-update').click(function() {
 
 				//Object ala js
-				var Customer = {
+				var ReturnTransaction = {
 					id : id,
-					name : $('#modname').val(),
-					address : $('#modaddress').val(),
-					email : $('#modemail').val(),
-					phoneNumber : $('#modphoneNumber').val(),
-					birthDate : $('#modbirthDate').val()
+					category : $('#modcategory').val(),
+					subcategory : $('#modsubcategory').val(),
+					section : $('#modsection').val(),
 				};
 
 				//ajax update
 				$.ajax({
 					type : 'PUT',
-					url : 'customer/update',
+					url : 'returnTransaction/update',
 					contentType : "application/json",
-					data : JSON.stringify(Customer),
+					data : JSON.stringify(Shelf),
 					success : function(data) {
-						window.location = "/customer";
+						window.location = "/shelf";
 					}
 				});
 			});
@@ -176,9 +137,9 @@
 
 				$.ajax({
 					type : 'DELETE',
-					url : 'customer/delete/' + id,
+					url : 'shelf/delete/' + id,
 					success : function(data) {
-						window.location = "/customer";
+						window.location = "/shelf";
 					}
 				});
 			});
@@ -200,31 +161,21 @@
 				<div class="modal-body">
 					<form>
 						<div class="form-group">
-							<label for="modname">Name</label> <input type="text"
-								class="form-control" id="modname" name="modname" placeholder=" ">
+							<label for="modcategory">Category</label> <input type="text"
+								class="form-control" id="modcategory" name="modcategory"
+								placeholder=" ">
 							<!-- <small id="nameHelp" class="form-text text-muted">Silahkan anda mengisi nama dengan benar</small> -->
 						</div>
 						<div class="form-group">
-							<label for="modaddress">Address</label> <input type="text"
-								class="form-control" id="modaddress" name="modaddress"
+							<label for="modsubcategory">Sub-category</label> <input
+								type="text" class="form-control" id="modsubcategory"
+								name="modsubcategory" placeholder=" ">
+							<!-- <small id="nameHelp" class="form-text text-muted">Silahkan anda mengisi nama dengan benar</small> -->
+						</div>
+						<div class="form-group">
+							<label for="modsection">Section</label> <input type="text"
+								class="form-control" id="modsection" name="modsection"
 								placeholder=" ">
-						</div>
-						<div class="form-group">
-							<label for="modemail">Email</label> <input type="email"
-								class="form-control" name="modemail" id="modemail"
-								placeholder=" ">
-						</div>
-						<div class="form-group">
-							<label for="modphoneNumber">Phone Number</label> <input
-								type="number" class="form-control" name="modphoneNumber"
-								id="modphoneNumber" placeholder=" "> <small
-								id="phoneNumberHelp" class="form-text text-muted">Example
-								: 0818xxxx8181 or 021xxx2121</small>
-						</div>
-						<div class="form-group">
-							<label for="modbirthDate">Birth Date :</label> <input type="date"
-								min="1920-12-31" class="form-control" id="modbirthDate"
-								placeholder=" " name="modbirthDate">
 						</div>
 					</form>
 				</div>
