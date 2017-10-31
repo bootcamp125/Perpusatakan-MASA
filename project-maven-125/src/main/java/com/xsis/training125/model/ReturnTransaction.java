@@ -27,16 +27,16 @@ public class ReturnTransaction {
 	@ManyToOne
 	private Employee employee;
 	@OneToOne(mappedBy="bookReturn")
-	private History history;
+	private RentHistory rentHistory;
 	
 	public ReturnTransaction() {}
 
-	public ReturnTransaction(int id, Date returnDate, Employee employee, History history) {
+	public ReturnTransaction(int id, Date returnDate, Employee employee, RentHistory rentHistory) {
 		super();
 		this.id = id;
 		this.returnDate = returnDate;
 		this.employee = employee;
-		this.history = history;
+		this.rentHistory = rentHistory;
 	}
 
 	public int getId() {
@@ -63,11 +63,19 @@ public class ReturnTransaction {
 		this.employee = employee;
 	}
 
-	public History getHistory() {
-		return history;
+	public RentHistory getHistory() {
+		return rentHistory;
 	}
 
-	public void setHistory(History history) {
-		this.history = history;
+	public void setHistory(RentHistory rentHistory) {
+		this.rentHistory = rentHistory;
+	}
+
+	public RentHistory getRentHistory() {
+		return rentHistory;
+	}
+
+	public void setRentHistory(RentHistory rentHistory) {
+		this.rentHistory = rentHistory;
 	}
 }

@@ -37,13 +37,13 @@ public class Employee {
 	@OneToMany(mappedBy="employee")
 	private List<ReturnTransaction> bookReturn;
 	@ManyToOne
-    private History history;
+    private RentHistory rentHistory;
 
 	public Employee() {
 	}
 
 	public Employee(int id, String name, String address, String email, String phoneNumber, Date birthDate,
-			List<BorrowTransaction> borrow, List<ReturnTransaction> bookReturn, History history) {
+			List<BorrowTransaction> borrow, List<ReturnTransaction> bookReturn, RentHistory rentHistory) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -53,7 +53,7 @@ public class Employee {
 		this.birthDate = birthDate;
 		this.borrow = borrow;
 		this.bookReturn = bookReturn;
-		this.history = history;
+		this.rentHistory = rentHistory;
 	}
 
 	public int getId() {
@@ -120,11 +120,11 @@ public class Employee {
 		this.bookReturn = bookReturn;
 	}
 
-	public History getHistory() {
-		return history;
+	public RentHistory getHistory() {
+		return rentHistory;
 	}
 
-	public void setHistory(History history) {
-		this.history = history;
+	public void setHistory(RentHistory rentHistory) {
+		this.rentHistory = rentHistory;
 	}
 }
