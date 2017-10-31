@@ -17,7 +17,7 @@ public class Shelf {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private int id; 
 	@Column(nullable = false)
 	private String category;
 	private String subcategory;
