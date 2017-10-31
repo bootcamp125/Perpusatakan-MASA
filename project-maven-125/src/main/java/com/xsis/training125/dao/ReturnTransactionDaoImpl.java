@@ -28,7 +28,7 @@ public class ReturnTransactionDaoImpl implements ReturnTransactionDao{
 		Session session = sessionFactory.getCurrentSession();
 		
 		// HQL (hibernate query language)
-		String myHql = "from Shelf";
+		String myHql = "from ReturnTransaction";
 		List<ReturnTransaction> returntransactions = session.createQuery(myHql).list();
 		if(returntransactions.isEmpty()){
 			return null;
@@ -37,7 +37,7 @@ public class ReturnTransactionDaoImpl implements ReturnTransactionDao{
 		return returntransactions;
 	}
 
-	public ReturnTransaction getShelfById(int id) {
+	public ReturnTransaction getReturnTransactionById(int id) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
 		
@@ -57,16 +57,9 @@ public class ReturnTransactionDaoImpl implements ReturnTransactionDao{
 		Session session = sessionFactory.getCurrentSession();
 		ReturnTransaction returntransaction = new ReturnTransaction();
 		returntransaction.setId(id);
-		returntransaction.setCategory("abc");
 		
 		session.delete(returntransaction);
 		session.flush();
-	}
-
-	@Override
-	public ReturnTransaction getReturnTransactionById(int id) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

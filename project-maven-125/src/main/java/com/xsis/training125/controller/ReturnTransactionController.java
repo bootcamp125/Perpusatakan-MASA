@@ -14,54 +14,55 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.xsis.training125.model.Shelf;
-import com.xsis.training125.service.ShelfService;
+import com.xsis.training125.model.ReturnTransaction;
+import com.xsis.training125.service.ReturnTransactionService;
+
 
 @Controller
-@RequestMapping("/shelf")
+@RequestMapping("/returntransaction")
 public class ReturnTransactionController {
 
 	@Autowired
-	ShelfService shelfService;
+	ReturnTransactionService returntransactionService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(Model model) {
 
-		List<Shelf> shelfs = shelfService.getAllShelfs();
-		model.addAttribute("shelfs", shelfs);
-		return "shelf";
+		List<ReturnTransaction> returntransactions = returntransactionService.getAllReturnTransactions();
+		model.addAttribute("returntransactions", returntransactions);
+		return "returntransaction";
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String savingData(@ModelAttribute Shelf shelf) {
-		shelfService.save(shelf);
-		return "redirect:/shelf";
+	public String savingData(@ModelAttribute ReturnTransaction returntransaction) {
+		returntransactionService.save(returntransaction);
+		return "redirect:/returntransaction";
 	}
 
 	@RequestMapping(value = "/edit/{id}")
 	@ResponseBody
-	public Shelf getShelfById(@PathVariable int id) {
-		Shelf result = shelfService.getShelfById(id);
+	public ReturnTransaction getReturnTransactionById(@PathVariable int id) {
+		ReturnTransaction result = returntransactionService.getReturnTransactionById(id);
 		return result;
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.OK)
-	public void updateShelf(@RequestBody Shelf shelf) {
-		shelfService.update(shelf);
+	public void updateReturnTransaction(@RequestBody ReturnTransaction returntransaction) {
+		returntransactionService.update(returntransaction);
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.OK)
 	public void delete(@PathVariable int id) {
-		shelfService.delete(id);
+		returntransactionService.delete(id);
 	}
 
 	@RequestMapping(value = "/allemp", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Shelf> getAllShelfs() {
-		List<Shelf> shelfs = shelfService.getAllShelfs();
+	public List<ReturnTransaction> getAllReturnTransactions() {
+		List<ReturnTransaction> returntransactions = returntransactionService.getAllReturnTransactions();
 
-		return shelfs;
+		return returntransactions;
 	}
 }
