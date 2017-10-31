@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.xsis.training125.model.Customer;
-import com.xsis.training125.model.Employee;
 
 @Repository
 public class CustomerDaoImpl implements CustomerDao {

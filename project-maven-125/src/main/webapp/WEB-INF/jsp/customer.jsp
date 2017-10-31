@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Library MASA Customer Entry</title>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"
 	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 	crossorigin="anonymous"></script>
@@ -55,14 +55,15 @@
 						<td>${customer.email }</td>
 						<td>${customer.phoneNumber }</td>
 						<td>${customer.birthDate }</td>
-						<td><a class="btn btn-outline-danger delete-btn">Delete</a> <a
+						<td><a data-id="${customer.id }"
+							class="btn btn-outline-danger delete-btn">Delete</a> <a
 							id="${customer.id }" class="btn btn-outline-warning update-btn">Update</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 
-		<form action="/customer/save" method="POST">
+		<form action="customer/save" method="POST">
 			<h2>Customer Entry</h2>
 			<div class="form-group row">
 				<label class="control-label col-sm-2" for="name">Name :</label>
@@ -98,8 +99,8 @@
 				<label class="control-label col-sm-2" for="birthDate">Birth
 					Date :</label>
 				<div class="col-sm-4">
-					<input class="form-control" id="birthDate" placeholder=" "
-						name="birthDate">
+					<input type="date" class="form-control" id="birthDate"
+						placeholder=" " name="birthDate">
 				</div>
 			</div>
 			<div class="form-group row">
@@ -110,13 +111,6 @@
 			</div>
 		</form>
 	</div>
-
-	<script>
-		$('#birthDate').datepicker({
-			uiLibrary : 'bootstrap4',
-			iconsLibrary : 'fontawesome'
-		});
-	</script>
 
 	<script type="text/javascript" src="/assets/js/jquery-3.2.1.min.js"></script>
 	<script
@@ -137,9 +131,9 @@
 
 				$.ajax({
 					type : 'POST',
-					url : '/customer/empid/' + id,
+					url : 'customer/empid/' + id,
 					success : function(data) {
-						//console.log(JSON.stringify(data));
+						console.log(JSON.stringify(data));
 						_setFieldUpdateModal(data);
 					},
 					dataType : 'json'
@@ -149,11 +143,11 @@
 			});
 
 			function _setFieldUpdateModal(data) {
-				$('#name').val(data.name);
-				$('#address').val(data.address);
-				$('#email').val(data.email);
-				$('#phoneNumber').val(data.phoneNumber);
-				$('#birthDate').val(data.birthDate);
+				$('#modname').val(data.name);
+				$('#modaddress').val(data.address);
+				$('#modemail').val(data.email);
+				$('#modphoneNumber').val(data.phoneNumber);
+				$('#modbirthDate').val(data.birthDate);
 			}
 
 			//event submit data for update
@@ -162,17 +156,17 @@
 				//Object ala js
 				var Customer = {
 					id : id,
-					name : $('#name').val(),
-					address : $('#address').val(),
-					email : $('#email').val(),
-					phone_number : $('#phoneNumber').val(),
-					birth_date : $('#birthDate').val()
+					name : $('#modname').val(),
+					address : $('#modaddress').val(),
+					email : $('#modemail').val(),
+					phoneNumber : $('#modphoneNumber').val(),
+					birthDate : $('#modbirthDate').val()
 				};
 
 				//ajax update
 				$.ajax({
 					type : 'PUT',
-					url : '/customer/update',
+					url : 'customer/update',
 					contentType : "application/json",
 					data : JSON.stringify(Customer),
 					success : function(data) {
@@ -181,15 +175,36 @@
 				});
 			});
 		});
-	</script>
 
+		//delete
+		$(document).ready(function() {
+
+			$('.delete-btn').on('click', function() {
+
+				id = $(this).data('id');
+				$('#deleteModal').modal(id);
+			});
+
+			$('#submit-delete').click(function() {
+
+				$.ajax({
+					type : 'DELETE',
+					url : 'customer/delete/' + id,
+					success : function(data) {
+						window.location = "/customer";
+					}
+				});
+			});
+		});
+	</script>
 
 	<div class="modal fade" id="updateModal" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Update
+						Confirmation</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -198,37 +213,60 @@
 				<div class="modal-body">
 					<form>
 						<div class="form-group">
-							<label for="name">Name</label> <input type="text"
-								class="form-control" id="name" name="name" placeholder=" ">
+							<label for="modname">Name</label> <input type="text"
+								class="form-control" id="modname" name="modname" placeholder=" ">
 							<!-- <small id="nameHelp" class="form-text text-muted">Silahkan anda mengisi nama dengan benar</small> -->
 						</div>
 						<div class="form-group">
-							<label for="address">Address</label> <input type="text"
-								class="form-control" id="address" name="address" placeholder=" ">
+							<label for="modaddress">Address</label> <input type="text"
+								class="form-control" id="modaddress" name="modaddress"
+								placeholder=" ">
 						</div>
 						<div class="form-group">
-							<label for="email">Email</label> <input type="email"
-								class="form-control" name="email" id="email" placeholder=" ">
+							<label for="modemail">Email</label> <input type="email"
+								class="form-control" name="modemail" id="modemail"
+								placeholder=" ">
 						</div>
 						<div class="form-group">
-							<label for="phoneNumber">Phone Number</label> <input
-								type="number" class="form-control" name="phoneNumber"
-								id="phoneNumber" placeholder=" "> <small
+							<label for="modphoneNumber">Phone Number</label> <input
+								type="number" class="form-control" name="modphoneNumber"
+								id="modphoneNumber" placeholder=" "> <small
 								id="phoneNumberHelp" class="form-text text-muted">Example
 								: 0818xxxx8181 or 021xxx2121</small>
 						</div>
 						<div class="form-group">
-							<label for="birthDate">Birth Date :</label> <input
-								class="form-control" id="birthDate" placeholder=" "
-								name="birthDate">
+							<label for="modbirthDate">Birth Date :</label> <input type="date"
+								class="form-control" id="modbirthDate" placeholder=" "
+								name="modbirthDate">
 						</div>
 					</form>
 				</div>
-
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">Close</button>
 					<button type="button" class="btn btn-primary" id="submit-update">Update</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Delete
+						Confirmation</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">Are you sure?</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-primary" id="submit-delete">Delete</button>
 				</div>
 			</div>
 		</div>
