@@ -63,14 +63,6 @@ public class ReturnTransaction {
 		this.employee = employee;
 	}
 
-	public RentHistory getHistory() {
-		return rentHistory;
-	}
-
-	public void setHistory(RentHistory rentHistory) {
-		this.rentHistory = rentHistory;
-	}
-
 	public RentHistory getRentHistory() {
 		return rentHistory;
 	}

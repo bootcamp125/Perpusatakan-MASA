@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.xsis.training125.dao.EmployeeDao;
 import com.xsis.training125.dao.ReturnTransactionDao;
 import com.xsis.training125.model.ReturnTransaction;
 
@@ -13,6 +14,8 @@ import com.xsis.training125.model.ReturnTransaction;
 @Service
 public class ReturnTransactionService {
 
+	@Autowired
+	EmployeeDao employeeDao;
 	@Autowired
 	ReturnTransactionDao returntransactionDao;
 
@@ -22,18 +25,6 @@ public class ReturnTransactionService {
 
 	public List<ReturnTransaction> getAllReturnTransactions() {
 		return returntransactionDao.getAllReturnTransactions();
-	}
-
-	public ReturnTransaction getReturnTransactionById(int id) {
-		return returntransactionDao.getReturnTransactionById(id);
-	}
-
-	public void update(ReturnTransaction returntransaction) {
-		returntransactionDao.update(returntransaction);
-	}
-
-	public void delete(int id) {
-		returntransactionDao.delete(id);
 	}
 
 }
