@@ -24,7 +24,7 @@
 <script src="http://code.gijgo.com/1.6.1/js/gijgo.js"
 	type="text/javascript"></script>
 <link href="http://code.gijgo.com/1.6.1/css/gijgo.css" rel="stylesheet"
-	type="text/css" />
+	type="text/css" /> 
 <link rel="stylesheet"
 	href="/assets/bootstrap-4.0.0-beta.2/dist/css/bootstrap.min.css" />
 </head>
