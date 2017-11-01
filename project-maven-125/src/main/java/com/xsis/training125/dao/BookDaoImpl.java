@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.xsis.training125.model.Book;
-import com.xsis.training125.model.BookStock;
 
 @Repository
 @SuppressWarnings("unchecked")
@@ -19,14 +18,7 @@ public class BookDaoImpl implements BookDao {
 	
 	public void save(Book book) {
 		Session session = sessionFactory.getCurrentSession();
-		int id = (int) session.save(book);
-		book.setId(id);
-		
-		BookStock bookStock = new BookStock();
-		bookStock.setBook(book);
-		bookStock.setStock(book.getBookStock().getStock());
-		
-		session.save(bookStock);
+		session.save(book);
 		session.flush();
 	}
 	
@@ -48,12 +40,7 @@ public class BookDaoImpl implements BookDao {
 	
 	public void update(Book book) {
 		Session session = sessionFactory.getCurrentSession();
-		BookStock bookStock = new BookStock();
-		bookStock.setId(book.getBookStock().getId());
-		bookStock.setBook(book);
-		bookStock.setStock(book.getBookStock().getStock());
 		session.update(book);
-		session.update(bookStock);
 		session.flush();
 	}
 	

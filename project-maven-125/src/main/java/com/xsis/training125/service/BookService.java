@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xsis.training125.dao.BookDao;
+import com.xsis.training125.dao.BookStockDao;
 import com.xsis.training125.model.Book;
+import com.xsis.training125.model.BookStock;
 
 @Transactional
 @Service
@@ -15,13 +17,19 @@ public class BookService {
 	
 	@Autowired
 	BookDao bookDao;
+	@Autowired
+	BookStockDao bookStockDao;
 	
 	public List<Book> getAllBook() {
 		return bookDao.getAllBook();
 	}
 	
 	public void save(Book book) {
+		
 		bookDao.save(book);
+		BookStock bookStock = book.getBookStock();
+		bookStock.setBook(book);
+		bookStockDao.save(bookStock);
 	}
 
 	public Book getBookById(int id) {
@@ -29,7 +37,12 @@ public class BookService {
 	}
 
 	public void update(Book book) {
+		
+		BookStock bookStock = book.getBookStock();
+		bookStock.setBook(book);
+		
 		bookDao.update(book);
+		bookStockDao.update(bookStock);
 	}
 
 	public void delete(int id) {

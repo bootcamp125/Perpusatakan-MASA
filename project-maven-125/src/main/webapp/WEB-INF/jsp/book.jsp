@@ -43,6 +43,14 @@
 			    	<label>Stock</label>
 			    	<input type="text" class="form-control" name="bookStock.stock">
 			  	</div>
+			  	<div class="form-group col-md-6">
+			    	<label>Category</label>
+			    	<select class="form-control" name="category.id">
+			    		<c:forEach var="shelf" items="${shelfs }">
+			    			<option value="${shelf.id }" label="${shelf.category }"/>
+			    		</c:forEach>
+			    	</select>
+			  	</div>
 			</div>
 			<button type="submit" class="btn btn-primary">Save</button><br><br><br><br>
 		</form>
@@ -55,6 +63,7 @@
 					<th>Author</th>
 					<th>Released Year</th>
 					<th>Publisher</th>
+					<th>Category</th>
 					<th>Stock</th>
 					<th>Action</th>
 				</tr>
@@ -67,6 +76,7 @@
 						<td>${book.author }</td>
 						<td>${book.releasedYear }</td>
 						<td>${book.publisher.name }</td>
+						<td>${book.shelf.category }</td>
 						<td>${book.bookStock.stock }</td>
 						<td>
 							<button class="btn btn-warning btn-sm update-btn" data-id="${book.id}">Update</button>
@@ -114,6 +124,7 @@
 				$('#publisher').val(data.publisher.id);
 				$('#bookStockId').val(data.bookStock.id);
 				$('#bookStock').val(data.bookStock.stock);
+				//$('#category').val(data.shelf.id);
 			}
 			
 			//submit update
@@ -130,7 +141,10 @@
 					bookStock : {
 						id : $('#bookStockId').val(),
 						stock : $('#bookStock').val()
-					}
+					},
+					/* shelf : {
+						id : $('#shelfId').val()
+					} */
 				};
 				
 				// ajax update
@@ -209,6 +223,14 @@
 			    	<label>Stock</label>
 			    	<input type="hidden" class="form-control" name="bookStockId" id="bookStockId">
 			    	<input type="text" class="form-control" name="bookStock" id="bookStock">
+			  	</div>
+			  	<div class="form-group col-md-6">
+			    	<label>Category</label>
+			    	<select class="form-control" name="category">
+			    		<c:forEach var="shelf" items="${shelfs }">
+			    			<option value="${shelf.id }" label="${shelf.category }"/>
+			    		</c:forEach>
+			    	</select>
 			  	</div>
 			</div>
 			</form>

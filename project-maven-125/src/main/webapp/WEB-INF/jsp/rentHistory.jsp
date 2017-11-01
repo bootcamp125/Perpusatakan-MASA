@@ -12,62 +12,30 @@
 	<link href="http://code.gijgo.com/1.5.1/css/gijgo.css" rel="stylesheet" type="text/css" />
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <body>
-	<div class="container">
-		<form action="borrow/save" method="POST">
-			<div class="form-row">
-			    <div class="form-group col-md-6">
-				    <label>ISBN</label>
-				    <input type="text" class="form-control" name="isbn">
-				</div>
-				<div class="form-group col-md-6">
-			    	<label>Title</label>
-			    	<input class="form-control" type="text" name="title"></td>
-				</div>
-				<div class="form-group col-md-6">
-			    	<label>Author</label>
-			    	<input type="text" class="form-control" name="author">
-			  	</div>
-			  	<div class="form-group col-md-6">
-			    	<label>Released Year</label>
-			    	<input type="text" class="form-control" name="releasedYear">
-			  	</div>
-			  	<div class="form-group col-md-6">
-			    	<label>Publisher</label>
-			    	<select class="form-control" name="publisher.id">
-			    		<c:forEach var="publisher" items="${publishers }">
-			    			<option value="${publisher.id }" label="${publisher.name }"/>
-			    		</c:forEach>
-			    	</select>
-			  	</div>
-			  	<div class="form-group col-md-6">
-			    	<label>Stock</label>
-			    	<input type="text" class="form-control" name="stock.stock">
-			  	</div>
-			</div>
-			<button type="submit" class="btn btn-primary">Save</button><br><br><br><br>
-		</form>
-		
+	<div class="container">		
 		<table class="table table-striped table-bordered table-hover">
   			<thead class="thead-dark">
 				<tr>
-					<th>ISBN</th>
-					<th>Title</th>
-					<th>Author</th>
-					<th>Released Year</th>
-					<th>Publisher</th>
-					<th>Stock</th>
+					<th>Customer</th>
+					<th>Borrow Date</th>
+					<th>Borrow Employee</th>
+					<th>Due Date</th>
+					<th>Return Date</th>
+					<th>Return Employee</th>
+					<th>Fine</th>
 					<th>Action</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="book" items="${books }">
+				<c:forEach var="rentHistories" items="${rentHistories }">
 					<tr>
-						<td>${book.isbn }</td>
-						<td>${book.title }</td>
-						<td>${book.author }</td>
-						<td>${book.releasedYear }</td>
-						<td>${book.publisher.name }</td>
-						<td>${book.stock.stock }</td>
+						<td>${rentHistories.borrowTransaction.customer.name }</td>
+						<td>${rentHistories.borrowTransaction.borrowDate }</td>
+						<td>${rentHistories.borrowTransaction.employee.name }</td>
+						<td>${rentHistories.dueDate }</td>
+						<td>${rentHistories.returnTransaction.returnDate }</td>
+						<td>${rentHistories.returnTransaction.employeee.name }</td>
+						<td>${rentHistories.fine }</td>
 						<td>
 							<button class="btn btn-warning btn-sm update-btn" data-id="${book.id}">Update</button>
 							<button class="btn btn-danger btn-sm delete-btn" data-id="${book.id}">Delete</button>
