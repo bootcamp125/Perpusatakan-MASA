@@ -108,7 +108,7 @@
 
 			function _setFieldUpdateModal(data) {
 				$('#modcategory').val(data.category);
-				$('#modsubcategory').val(data.category);
+				$('#modsubcategory').val(data.subcategory);
 				$('#modsection').val(data.section);
 
 			}

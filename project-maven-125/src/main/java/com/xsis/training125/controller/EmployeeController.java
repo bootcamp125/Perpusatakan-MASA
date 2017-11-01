@@ -20,31 +20,43 @@ import com.xsis.training125.service.EmployeeService;
 @Controller
 @RequestMapping("/employee")
 public class EmployeeController {
-	// REST API -> @ResponseBody
+
 	@Autowired
 	EmployeeService employeeService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(Model model) {
-
 		List<Employee> employees = employeeService.getAllEmployees();
 		model.addAttribute("employees", employees);
+
 		return "employee";
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String savingData(@ModelAttribute Employee employee) {
+	public String save(@ModelAttribute Employee employee) {
 		employeeService.save(employee);
 		return "redirect:/employee";
 	}
 
-	/*
-	 * @RequestMapping(value="/save2", method=RequestMethod.POST)
-	 * 
-	 * @ResponseStatus(HttpStatus.CREATED) public void savingData2(@RequestBody
-	 * Employee employee){ employeeService.save(employee); }
-	 */
+/*	@RequestMapping(value = "/edit/{id}")
+	@ResponseBody
+	public Employee getEmployeeById(@PathVariable int id) {
+		Employee result = employeeService.getEmployeeById(id);
+		return result;
+	}
 
+	@RequestMapping(value = "/update", method = RequestMethod.PUT)
+	@ResponseStatus(HttpStatus.OK)
+	public void update(@RequestBody Employee employee) {
+		employeeService.update(employee);
+	}
+
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+	@ResponseStatus(HttpStatus.OK)
+	public void delete(@PathVariable int id) {
+		employeeService.delete(id);
+	}*/
+	
 	@RequestMapping(value = "/edit/{id}")
 	@ResponseBody
 	public Employee getEmployeeById(@PathVariable int id) {
@@ -54,7 +66,7 @@ public class EmployeeController {
 
 	@RequestMapping(value = "/update", method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.OK)
-	public void updateEmployee(@RequestBody Employee employee) {
+	public void update(@RequestBody Employee employee) {
 		employeeService.update(employee);
 	}
 
@@ -63,13 +75,13 @@ public class EmployeeController {
 	public void delete(@PathVariable int id) {
 		employeeService.delete(id);
 	}
-
-	@RequestMapping(value = "/allemp", method = RequestMethod.GET)
+	
+	
+/*	@RequestMapping(value = "/allemp", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Employee> getAllEmployees() {
 		List<Employee> employees = employeeService.getAllEmployees();
 
 		return employees;
-	}
-
+	}*/
 }

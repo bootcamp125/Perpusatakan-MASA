@@ -9,9 +9,23 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Library MASA Customer Entry</title>
-<script type="text/javascript" src="/assets/js/jquery-3.2.1.min.js"></script>
-<script type="text/javascript"
-		src="/assets/bootstrap-4.0.0-beta.2/dist/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+	crossorigin="anonymous">
+<link
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet"
+	integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+	crossorigin="anonymous">
+<script src="http://code.gijgo.com/1.6.1/js/gijgo.js"
+	type="text/javascript"></script>
+<link href="http://code.gijgo.com/1.6.1/css/gijgo.css" rel="stylesheet"
+	type="text/css" />
+
 <link rel="stylesheet"
 	href="/assets/bootstrap-4.0.0-beta.2/dist/css/bootstrap.min.css" />
 </head>
@@ -86,7 +100,7 @@
 				<label class="control-label col-sm-2" for="birthDate">Birth
 					Date :</label>
 				<div class="col-sm-4">
-					<input type="date" min="1920-12-31" class="form-control"
+					<input type="text" min="1920-12-31" class="form-control"
 						id="birthDate" placeholder=" " name="birthDate">
 				</div>
 			</div>
@@ -99,6 +113,13 @@
 		</form>
 	</div>
 
+	<script>
+		$('#birthDate').datepicker({
+			uiLibrary : 'bootstrap4',
+			iconsLibrary : 'fontawesome'
+		});
+	</script>
+	
 	<script type="text/javascript" src="/assets/js/jquery-3.2.1.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
