@@ -19,9 +19,4 @@ public class RentHistoryService {
 	public List<RentHistory> getAllHistories() {
 		return rentHistoryDao.getAllHistories(); 
 	}
-
-	public void save(RentHistory rentHistory) {
-		rentHistoryDao.save(rentHistory);
-	}
-
 }

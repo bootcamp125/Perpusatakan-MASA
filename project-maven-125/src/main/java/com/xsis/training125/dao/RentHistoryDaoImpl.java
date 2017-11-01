@@ -7,7 +7,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.xsis.training125.model.BorrowTransaction;
 import com.xsis.training125.model.RentHistory;
 
 @Repository
@@ -26,12 +25,5 @@ public class RentHistoryDaoImpl implements RentHistoryDao {
 			return null;
 		}
 		return rentHistory;
-	}
-	
-	@Override
-	public void save(RentHistory rentHistory) {
-		Session session = sessionFactory.getCurrentSession();
-		session.save(rentHistory);
-		session.flush();
 	}
 }

@@ -22,7 +22,10 @@ public class BorrowTransactionDaoImpl implements BorrowTransactionDao {
 		int idPeminjaman = (int) session.save(borrowTransaction);
 		borrowTransaction.setId(idPeminjaman);
 		
+		RentHistory rentHistory = new RentHistory();
+		rentHistory.setBorrowTransaction(borrowTransaction);
 		
+		session.save(rentHistory);
 		session.flush();
 	}
 }

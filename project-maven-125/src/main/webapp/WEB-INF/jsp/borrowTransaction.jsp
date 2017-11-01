@@ -13,7 +13,7 @@
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <body>
 	<div class="container">
-		<form action="borrow_trasanction/save" method="POST">
+		<form action="borrow_transaction/save" method="POST">
 			<label><h1>Borrow Entry</h1></label>
 			<div class="form-row">
 			    <div class="form-group col-md-6">
@@ -26,12 +26,12 @@
 				</div>
 				<div class="form-group col-md-6">
 			    	<label>Borrow Date</label>
-			    	<input type="text" class="form-control" name="borrow.borrowDate" id="borrowDate"></td>
+			    	<input type="text" class="form-control" name="borrowDate" id="borrowDate"></td>
 				</div>
 			  	<div class="form-group col-md-6">
 			    	<label>Employee</label>
 			    	<c:forEach var="employees" items="${employees }">
-			    		<input type="hidden" class="form-control" name="borrow.employee.id" value="${employees.id }">
+			    		<input type="hidden" class="form-control" name="employee.id" value="${employees.id }">
 			    		<input type="text" class="form-control" value="${employees.name }">
 			    	</c:forEach>
 			  	</div>

@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -27,11 +26,5 @@ public class RentHistoryController {
 		List<RentHistory> rentHistories = rentHistoryService.getAllHistories();
 		model.addAttribute("rentHistories", rentHistories);
 		return "rentHistory";
-	}
-	
-	@RequestMapping(value="/save", method = RequestMethod.POST)
-	public String save(@ModelAttribute RentHistory rentHistory) {
-		rentHistoryService.save(rentHistory);
-		return "redirect:/rent_history";
 	}
 }
