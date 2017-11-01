@@ -26,10 +26,11 @@ public class BookService {
 	
 	public void save(Book book) {
 		
-		bookDao.save(book);
 		BookStock bookStock = book.getBookStock();
-		bookStock.setBook(book);
 		bookStockDao.save(bookStock);
+		
+		book.setBookStock(bookStock);
+		bookDao.save(book);
 	}
 
 	public Book getBookById(int id) {
@@ -39,7 +40,6 @@ public class BookService {
 	public void update(Book book) {
 		
 		BookStock bookStock = book.getBookStock();
-		bookStock.setBook(book);
 		
 		bookDao.update(book);
 		bookStockDao.update(bookStock);

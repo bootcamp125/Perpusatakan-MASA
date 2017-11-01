@@ -19,7 +19,7 @@ public class BookStock {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
-	@OneToOne
+	@OneToOne(mappedBy="bookStock", cascade=CascadeType.ALL, orphanRemoval=true)
 	private Book book;
 	private int stock;
 	

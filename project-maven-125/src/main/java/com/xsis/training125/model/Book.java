@@ -1,6 +1,5 @@
 package com.xsis.training125.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,7 +29,8 @@ public class Book {
 	private Publisher publisher;
 	@ManyToOne
 	private Shelf shelf;
-	@OneToOne(mappedBy="book", cascade=CascadeType.ALL, orphanRemoval=true)
+	@OneToOne
+	@JoinColumn(name="book_stock_id")
 	private BookStock bookStock;
 	@ManyToOne
 	@JoinColumn(name="book_transaction_id")
