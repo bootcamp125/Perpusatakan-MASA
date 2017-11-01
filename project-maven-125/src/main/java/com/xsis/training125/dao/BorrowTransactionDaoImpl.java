@@ -6,17 +6,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.xsis.training125.model.BorrowTransaction;
+import com.xsis.training125.model.RentHistory;
+import com.xsis.training125.service.RentHistoryService;
 
 @Repository
 public class BorrowTransactionDaoImpl implements BorrowTransactionDao {
 	
 	@Autowired
 	SessionFactory sessionFactory;
+	@Autowired
+	RentHistoryService rentHistoryService;
 	
-	@Override
 	public void save(BorrowTransaction borrowTransaction) {
 		Session session = sessionFactory.getCurrentSession();
-		session.save(borrowTransaction);
+		int idPeminjaman = (int) session.save(borrowTransaction);
+		borrowTransaction.setId(idPeminjaman);
+		
+		
 		session.flush();
 	}
 }

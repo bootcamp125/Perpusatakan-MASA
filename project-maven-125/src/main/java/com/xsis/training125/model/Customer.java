@@ -36,13 +36,13 @@ public class Customer {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date birthDate;
 	@OneToMany(mappedBy="customer")
-    private List<RentHistory> rentHistory;
+    private List<BorrowTransaction> borrowTransaction;
 	
 	public Customer() {
 	}
 
 	public Customer(int id, String name, String address, String email, String phoneNumber, Date birthDate,
-			List<RentHistory> rentHistory) {
+			List<BorrowTransaction> borrowTransaction) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -50,7 +50,7 @@ public class Customer {
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.birthDate = birthDate;
-		this.rentHistory = rentHistory;
+		this.borrowTransaction = borrowTransaction;
 	}
 
 	public int getId() {
@@ -101,11 +101,11 @@ public class Customer {
 		this.birthDate = birthDate;
 	}
 
-	public List<RentHistory> getHistory() {
-		return rentHistory;
+	public List<BorrowTransaction> getBorrowTransaction() {
+		return borrowTransaction;
 	}
 
-	public void setHistory(List<RentHistory> rentHistory) {
-		this.rentHistory = rentHistory;
+	public void setBorrowTransaction(List<BorrowTransaction> borrowTransaction) {
+		this.borrowTransaction = borrowTransaction;
 	}
 }

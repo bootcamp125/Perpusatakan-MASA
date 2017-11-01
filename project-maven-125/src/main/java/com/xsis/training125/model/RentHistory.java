@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,25 +22,22 @@ public class RentHistory {
 	private Date dueDate;
 	private int fine;
 	@OneToOne
-	private BorrowTransaction borrow;
+	private BorrowTransaction borrowTransaction;
 	@OneToOne
-	private ReturnTransaction bookReturn;
-	@ManyToOne
-	private Customer customer;
-		
+	private ReturnTransaction returnTransaction;
+	
 	public RentHistory() {
 		
 	}
 
-	public RentHistory(int id, Date dueDate, int fine, BorrowTransaction borrow, ReturnTransaction bookReturn,
-			Customer customer) {
+	public RentHistory(int id, Date dueDate, int fine, BorrowTransaction borrowTransaction,
+			ReturnTransaction returnTransaction) {
 		super();
 		this.id = id;
 		this.dueDate = dueDate;
 		this.fine = fine;
-		this.borrow = borrow;
-		this.bookReturn = bookReturn;
-		this.customer = customer;
+		this.borrowTransaction = borrowTransaction;
+		this.returnTransaction = returnTransaction;
 	}
 
 	public int getId() {
@@ -51,29 +47,21 @@ public class RentHistory {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	public BorrowTransaction getBorrow() {
-		return borrow;
+	
+	public BorrowTransaction getBorrowTransaction() {
+		return borrowTransaction;
 	}
 
-	public void setBorrow(BorrowTransaction borrow) {
-		this.borrow = borrow;
+	public void setBorrowTransaction(BorrowTransaction borrowTransaction) {
+		this.borrowTransaction = borrowTransaction;
 	}
 
-	public ReturnTransaction getBookReturn() {
-		return bookReturn;
+	public ReturnTransaction getReturnTransaction() {
+		return returnTransaction;
 	}
 
-	public void setBookReturn(ReturnTransaction bookReturn) {
-		this.bookReturn = bookReturn;
-	}
-
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setReturnTransaction(ReturnTransaction returnTransaction) {
+		this.returnTransaction = returnTransaction;
 	}
 
 	public Date getDueDate() {

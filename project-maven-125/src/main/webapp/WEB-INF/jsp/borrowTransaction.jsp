@@ -13,7 +13,7 @@
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <body>
 	<div class="container">
-		<form action="rent_history/save" method="POST">
+		<form action="borrow_trasanction/save" method="POST">
 			<label><h1>Borrow Entry</h1></label>
 			<div class="form-row">
 			    <div class="form-group col-md-6">
@@ -30,8 +30,10 @@
 				</div>
 			  	<div class="form-group col-md-6">
 			    	<label>Employee</label>
-			    	<input type="text" class="form-control" name="" value="" hidden>
-			    	<input type="text" class="form-control" value="">
+			    	<c:forEach var="employees" items="${employees }">
+			    		<input type="hidden" class="form-control" name="borrow.employee.id" value="${employees.id }">
+			    		<input type="text" class="form-control" value="${employees.name }">
+			    	</c:forEach>
 			  	</div>
 			</div>
 			<button type="submit" class="btn btn-primary">Save</button><br><br><br><br>
