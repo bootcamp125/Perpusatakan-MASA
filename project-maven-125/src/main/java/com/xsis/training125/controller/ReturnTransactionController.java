@@ -8,7 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.xsis.training125.model.Employee;
 import com.xsis.training125.model.ReturnTransaction;
+import com.xsis.training125.service.EmployeeService;
 import com.xsis.training125.service.ReturnTransactionService;
 
 
@@ -18,12 +21,18 @@ public class ReturnTransactionController {
 
 	@Autowired
 	ReturnTransactionService returnTransactionService;
+	@Autowired
+	EmployeeService employeeService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(Model model) {
 
 		List<ReturnTransaction> returnTransactions = returnTransactionService.getAllReturnTransactions();
 		model.addAttribute("returnTransactions", returnTransactions);
+		
+		List<Employee> employees = employeeService.getAllEmployees();
+		model.addAttribute("employees", employees);
+		
 		return "returnTransaction";
 	}
 

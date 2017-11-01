@@ -25,7 +25,6 @@
 	type="text/javascript"></script>
 <link href="http://code.gijgo.com/1.6.1/css/gijgo.css" rel="stylesheet"
 	type="text/css" />
-
 <link rel="stylesheet"
 	href="/assets/bootstrap-4.0.0-beta.2/dist/css/bootstrap.min.css" />
 </head>
@@ -92,7 +91,7 @@
 				<label class="control-label col-sm-2" for="phoneNumber">Phone
 					Number :</label>
 				<div class="col-sm-4">
-					<input type="number" class="form-control" id="phoneNumber"
+					<input type="number" min="0" class="form-control" id="phoneNumber"
 						placeholder=" " name="phoneNumber">
 				</div>
 			</div>
@@ -237,7 +236,7 @@
 						</div>
 						<div class="form-group">
 							<label for="modphoneNumber">Phone Number</label> <input
-								type="number" class="form-control" name="modphoneNumber"
+								type="number" min="0" class="form-control" name="modphoneNumber"
 								id="modphoneNumber" placeholder=" "> <small
 								id="phoneNumberHelp" class="form-text text-muted">Example
 								: 0818xxxx8181 or 021xxx2121</small>
