@@ -7,7 +7,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -23,8 +22,6 @@ public class BookTransaction {
 	private BorrowTransaction borrow;
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="transaction")
 	private List<Book> book;
-	@ManyToOne
-	private Customer customer;
 	
 	public BookTransaction() { }
 

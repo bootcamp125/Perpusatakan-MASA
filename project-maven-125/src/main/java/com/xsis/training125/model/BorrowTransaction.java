@@ -27,8 +27,10 @@ public class BorrowTransaction {
 	private BookTransaction book;
 	@ManyToOne
 	private Employee employee;
-	@OneToOne(mappedBy="borrow")
+	@OneToOne(mappedBy="borrowTransaction")
 	private RentHistory rentHistory;
+	@ManyToOne
+	private Customer customer;
 	
 	public BorrowTransaction() { }
 

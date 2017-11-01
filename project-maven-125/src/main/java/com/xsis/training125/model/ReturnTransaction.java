@@ -26,7 +26,7 @@ public class ReturnTransaction {
 	private Date returnDate;
 	@ManyToOne
 	private Employee employee;
-	@OneToOne(mappedBy="bookReturn")
+	@OneToOne(mappedBy="returnTransaction")
 	private RentHistory rentHistory;
 	
 	public ReturnTransaction() {}
