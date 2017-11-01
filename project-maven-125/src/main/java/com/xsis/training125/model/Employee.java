@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -38,9 +36,6 @@ public class Employee {
 	private List<BorrowTransaction> borrowTransaction;
 	@OneToMany(mappedBy="employee")
 	private List<ReturnTransaction> returnTransaction;
-	@ManyToOne
-	@JoinColumn(name="RENT_HISTORY_ID")
-    private RentHistory rentHistory;
 
 	public Employee() {
 	}
@@ -56,7 +51,6 @@ public class Employee {
 		this.birthDate = birthDate;
 		this.borrowTransaction = borrowTransaction;
 		this.returnTransaction = returnTransaction;
-		this.rentHistory = rentHistory;
 	}
 
 	public int getId() {
@@ -121,21 +115,5 @@ public class Employee {
 
 	public void setReturnTransaction(List<ReturnTransaction> returnTransaction) {
 		this.returnTransaction = returnTransaction;
-	}
-
-	public RentHistory getRentHistory() {
-		return rentHistory;
-	}
-
-	public void setRentHistory(RentHistory rentHistory) {
-		this.rentHistory = rentHistory;
-	}
-
-	public RentHistory getHistory() {
-		return rentHistory;
-	}
-
-	public void setHistory(RentHistory rentHistory) {
-		this.rentHistory = rentHistory;
 	}
 }
