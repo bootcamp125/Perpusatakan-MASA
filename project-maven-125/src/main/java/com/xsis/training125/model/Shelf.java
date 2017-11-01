@@ -21,6 +21,7 @@ public class Shelf {
 	private int id; 
 	@Column(nullable = false)
 	private String category;
+	@Column(name="sub_category")
 	private String subcategory;
 	private String section;
 	@OneToMany(mappedBy="shelf")

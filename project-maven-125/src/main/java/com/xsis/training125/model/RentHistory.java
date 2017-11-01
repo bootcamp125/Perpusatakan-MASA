@@ -7,11 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
+@Table(name="RENT_HISTORY")
 public class RentHistory {
 	
 	@Id
@@ -22,8 +25,10 @@ public class RentHistory {
 	private Date dueDate;
 	private int fine;
 	@OneToOne
+	@JoinColumn(name="BORROW_TRANSACTION_ID")
 	private BorrowTransaction borrowTransaction;
 	@OneToOne
+	@JoinColumn(name="RETURN_TRANSACTION_ID")
 	private ReturnTransaction returnTransaction;
 	
 	public RentHistory() {

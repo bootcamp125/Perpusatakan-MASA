@@ -2,6 +2,7 @@ package com.xsis.training125.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,6 +22,7 @@ public class BorrowTransaction {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	@Temporal(TemporalType.DATE)
+	@Column(name="BORROW_DATE")
 	private Date borrowDate;
 	@OneToOne
 	@JoinColumn(name="book_transaction_id")

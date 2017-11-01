@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -31,11 +32,13 @@ public class Book {
 	@OneToOne(mappedBy="book")
 	private BookStock bookStock;
 	@ManyToOne
-	private BookTransaction transaction;
+	@JoinColumn(name="book_transaction_id")
+	private BookTransaction bookTransaction;
+	
 	public Book() { }
 
 	public Book(int id, String isbn, String title, String author, String releasedYear, Publisher publisher, Shelf shelf,
-			BookStock bookStock, BookTransaction transaction) {
+			BookStock bookStock, BookTransaction bookTransaction) {
 		super();
 		this.id = id;
 		this.isbn = isbn;
@@ -45,7 +48,7 @@ public class Book {
 		this.publisher = publisher;
 		this.shelf = shelf;
 		this.bookStock = bookStock;
-		this.transaction = transaction;
+		this.bookTransaction = bookTransaction;
 	}
 
 	public int getId() {
@@ -112,11 +115,11 @@ public class Book {
 		this.bookStock = bookStock;
 	}
 
-	public BookTransaction getTransaction() {
-		return transaction;
+	public BookTransaction getBookTransaction() {
+		return bookTransaction;
 	}
 
-	public void setTransaction(BookTransaction transaction) {
-		this.transaction = transaction;
+	public void setBookTransaction(BookTransaction bookTransaction) {
+		this.bookTransaction = bookTransaction;
 	}
 }

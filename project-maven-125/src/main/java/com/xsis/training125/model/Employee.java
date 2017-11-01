@@ -8,12 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -36,17 +35,18 @@ public class Employee {
 	@Temporal(TemporalType.DATE)
 	private Date birthDate;
 	@OneToMany(mappedBy="employee")
-	private List<BorrowTransaction> borrow;
+	private List<BorrowTransaction> borrowTransaction;
 	@OneToMany(mappedBy="employee")
-	private List<ReturnTransaction> bookReturn;
+	private List<ReturnTransaction> returnTransaction;
 	@ManyToOne
+	@JoinColumn(name="RENT_HISTORY_ID")
     private RentHistory rentHistory;
 
 	public Employee() {
 	}
 
 	public Employee(int id, String name, String address, String email, String phoneNumber, Date birthDate,
-			List<BorrowTransaction> borrow, List<ReturnTransaction> bookReturn, RentHistory rentHistory) {
+			List<BorrowTransaction> borrowTransaction, List<ReturnTransaction> returnTransaction, RentHistory rentHistory) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -54,8 +54,8 @@ public class Employee {
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.birthDate = birthDate;
-		this.borrow = borrow;
-		this.bookReturn = bookReturn;
+		this.borrowTransaction = borrowTransaction;
+		this.returnTransaction = returnTransaction;
 		this.rentHistory = rentHistory;
 	}
 
@@ -106,21 +106,29 @@ public class Employee {
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
-
-	public List<BorrowTransaction> getBorrow() {
-		return borrow;
+	
+	public List<BorrowTransaction> getBorrowTransaction() {
+		return borrowTransaction;
 	}
 
-	public void setBorrow(List<BorrowTransaction> borrow) {
-		this.borrow = borrow;
+	public void setBorrowTransaction(List<BorrowTransaction> borrowTransaction) {
+		this.borrowTransaction = borrowTransaction;
 	}
 
-	public List<ReturnTransaction> getBookReturn() {
-		return bookReturn;
+	public List<ReturnTransaction> getReturnTransaction() {
+		return returnTransaction;
 	}
 
-	public void setBookReturn(List<ReturnTransaction> bookReturn) {
-		this.bookReturn = bookReturn;
+	public void setReturnTransaction(List<ReturnTransaction> returnTransaction) {
+		this.returnTransaction = returnTransaction;
+	}
+
+	public RentHistory getRentHistory() {
+		return rentHistory;
+	}
+
+	public void setRentHistory(RentHistory rentHistory) {
+		this.rentHistory = rentHistory;
 	}
 
 	public RentHistory getHistory() {
