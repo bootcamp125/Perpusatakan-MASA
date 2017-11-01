@@ -29,7 +29,7 @@ public class ReturnTransaction {
 	@ManyToOne
 	@Column(nullable=false)
 	private Employee employee;
-	@OneToOne(mappedBy="returnTransaction") 
+	@OneToOne(mappedBy="returnTransaction")
 	private RentHistory rentHistory;
 	
 	public ReturnTransaction() {}

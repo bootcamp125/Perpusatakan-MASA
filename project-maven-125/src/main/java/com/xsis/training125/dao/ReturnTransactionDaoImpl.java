@@ -36,30 +36,4 @@ public class ReturnTransactionDaoImpl implements ReturnTransactionDao{
 		
 		return returnTransactions;
 	}
-
-	public ReturnTransaction getReturnTransactionById(int id) {
-		// TODO Auto-generated method stub
-		Session session = sessionFactory.getCurrentSession();
-		
-		ReturnTransaction returnTransaction = session.get(ReturnTransaction.class, id);
-		return returnTransaction;
-	}
-
-	public void update(ReturnTransaction returnTransaction) {
-		// TODO Auto-generated method stub
-		Session session = sessionFactory.getCurrentSession();
-		session.update(returnTransaction);
-		session.flush();
-	}
-
-	public void delete(int id) {
-		// TODO Auto-generated method stub
-		Session session = sessionFactory.getCurrentSession();
-		ReturnTransaction returnTransaction = new ReturnTransaction();
-		returnTransaction.setId(id);
-		
-		session.delete(returnTransaction);
-		session.flush();
-	}
-
 }

@@ -8,7 +8,4 @@ public interface RentHistoryDao {
 
 	List<RentHistory> getAllHistories();
 
-	void save(RentHistory rentHistory);
-
-
 }

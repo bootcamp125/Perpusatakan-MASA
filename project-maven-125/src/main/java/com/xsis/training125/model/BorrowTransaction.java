@@ -2,6 +2,7 @@ package com.xsis.training125.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,14 +14,19 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name="BORROW_TRANSACTION")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class BorrowTransaction {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	@Temporal(TemporalType.DATE)
+	@Column(name="BORROW_DATE")
 	private Date borrowDate;
 	@OneToOne
 	@JoinColumn(name="book_transaction_id")
@@ -33,16 +39,18 @@ public class BorrowTransaction {
 	private Customer customer;
 	
 	public BorrowTransaction() { }
-
-	public BorrowTransaction(int id, Date borrowDate, BookTransaction book, Employee employee, RentHistory rentHistory) {
+	
+	public BorrowTransaction(int id, Date borrowDate, BookTransaction book, Employee employee, RentHistory rentHistory,
+			Customer customer) {
 		super();
 		this.id = id;
 		this.borrowDate = borrowDate;
 		this.book = book;
 		this.employee = employee;
 		this.rentHistory = rentHistory;
+		this.customer = customer;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -81,5 +89,21 @@ public class BorrowTransaction {
 
 	public void setHistory(RentHistory rentHistory) {
 		this.rentHistory = rentHistory;
+	}
+
+	public RentHistory getRentHistory() {
+		return rentHistory;
+	}
+
+	public void setRentHistory(RentHistory rentHistory) {
+		this.rentHistory = rentHistory;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 }
