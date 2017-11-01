@@ -48,7 +48,12 @@ public class BookDaoImpl implements BookDao {
 	
 	public void update(Book book) {
 		Session session = sessionFactory.getCurrentSession();
+		BookStock bookStock = new BookStock();
+		bookStock.setId(book.getBookStock().getId());
+		bookStock.setBook(book);
+		bookStock.setStock(book.getBookStock().getStock());
 		session.update(book);
+		session.update(bookStock);
 		session.flush();
 	}
 	

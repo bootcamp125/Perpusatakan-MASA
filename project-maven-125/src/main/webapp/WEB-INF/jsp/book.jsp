@@ -41,7 +41,7 @@
 			  	</div>
 			  	<div class="form-group col-md-6">
 			    	<label>Stock</label>
-			    	<input type="text" class="form-control" name="stock.stock">
+			    	<input type="text" class="form-control" name="bookStock.stock">
 			  	</div>
 			</div>
 			<button type="submit" class="btn btn-primary">Save</button><br><br><br><br>
@@ -67,7 +67,7 @@
 						<td>${book.author }</td>
 						<td>${book.releasedYear }</td>
 						<td>${book.publisher.name }</td>
-						<td>${book.stock.stock }</td>
+						<td>${book.bookStock.stock }</td>
 						<td>
 							<button class="btn btn-warning btn-sm update-btn" data-id="${book.id}">Update</button>
 							<button class="btn btn-danger btn-sm delete-btn" data-id="${book.id}">Delete</button>
@@ -112,6 +112,8 @@
 				$('#author').val(data.author);
 				$('#releasedYear').val(data.releasedYear);
 				$('#publisher').val(data.publisher.id);
+				$('#bookStockId').val(data.bookStock.id);
+				$('#bookStock').val(data.bookStock.stock);
 			}
 			
 			//submit update
@@ -122,7 +124,13 @@
 					title : $('#title').val(),
 					author : $('#author').val(),
 					releasedYear : $('#releasedYear').val(),
-					publisher : {id : $('#publisher').val()}
+					publisher : {
+						id : $('#publisher').val()
+					},
+					bookStock : {
+						id : $('#bookStockId').val(),
+						stock : $('#bookStock').val()
+					}
 				};
 				
 				// ajax update
@@ -196,6 +204,11 @@
 			    			<option value="${publisher.id }" label="${publisher.name }"/>
 			    		</c:forEach>
 			    	</select>
+			  	</div>
+			  	<div class="form-group col-md-6">
+			    	<label>Stock</label>
+			    	<input type="hidden" class="form-control" name="bookStockId" id="bookStockId">
+			    	<input type="text" class="form-control" name="bookStock" id="bookStock">
 			  	</div>
 			</div>
 			</form>

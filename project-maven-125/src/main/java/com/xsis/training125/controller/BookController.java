@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import com.xsis.training125.model.Book;
 import com.xsis.training125.model.Publisher;
 import com.xsis.training125.service.BookService;
+import com.xsis.training125.service.BookStockService;
 import com.xsis.training125.service.PublisherService;
 
 @Controller
@@ -27,6 +28,8 @@ public class BookController {
 	BookService bookService;
 	@Autowired
 	PublisherService publisherService;
+	@Autowired
+	BookStockService bookStockService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(Model model) {
