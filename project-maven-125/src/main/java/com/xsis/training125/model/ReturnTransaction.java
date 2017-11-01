@@ -27,7 +27,6 @@ public class ReturnTransaction {
 	@Column(name = "return_date", nullable=false)
 	private Date returnDate;
 	@ManyToOne
-	@Column(nullable=false)
 	private Employee employee;
 	@OneToOne(mappedBy="returnTransaction")
 	private RentHistory rentHistory;
