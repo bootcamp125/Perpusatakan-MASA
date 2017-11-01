@@ -5,7 +5,7 @@ import java.util.List;
 import com.xsis.training125.model.Employee;
 
 public interface EmployeeDao {
-
+	
 	public void save(Employee employee);
 
 	public List<Employee> getAllEmployees();
@@ -15,6 +15,4 @@ public interface EmployeeDao {
 	public void update(Employee employee);
 
 	public void delete(int id);
-
-
 }
