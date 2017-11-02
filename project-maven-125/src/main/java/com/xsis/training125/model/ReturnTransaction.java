@@ -24,7 +24,7 @@ public class ReturnTransaction {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	@Temporal(TemporalType.DATE)
-	@Column(name = "return_date", nullable=false)
+	@Column(name = "return_date")
 	private Date returnDate;
 	@ManyToOne
 	private Employee employee;
