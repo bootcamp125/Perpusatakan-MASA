@@ -260,7 +260,7 @@
 			$('.delete-btn').on('click',function() {
 				
 				id = $(this).data('id');
-				$('#deleteConfirmation').modal(id);
+				$('#delete-modal').modal(id);
 			});
 			
 			$('#ok-delete').click(function(){
@@ -276,146 +276,87 @@
 		});
 	</script>
 	
+	<!-- Modal Update -->
 	<div class="col-md-12">
 		<div class="modal fade"  id="update-modal">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			        <h4 class="modal-title">Modal title</h4>
+			        <h4 class="modal-title">Update Book</h4>
 		        </div>
 		        <div class="modal-body">
-		        	<form>
+		        	<form style="margin-top: 3%;">
 						<div class="form-row">
-					    <div class="form-group col-md-6">
-						    <label>ISBN</label>
-						    <input type="text" class="form-control" name="isbn" id="isbn">
+						    <div class="form-group col-md-6">
+							    <label>ISBN</label>
+							    <input type="text" class="form-control" name="isbn" id="isbn">
+							</div>
+							<div class="form-group col-md-6">
+						    	<label>Author</label>
+						    	<input type="text" class="form-control" name="author" id="author">
+						  	</div>
+							<div class="form-group" style="margin-left:2.5%; margin-right: 2.5%;">
+						    	<label>Title</label>
+						    	<input class="form-control" type="text" name="title" id="title"></td>
+							</div>
+						  	<div class="form-group col-md-6">
+						    	<label>Released Year</label>
+						    	<input type="text" class="form-control" name="releasedYear" id="releasedYear">
+						  	</div>
+						  	<div class="form-group col-md-6">
+						    	<label>Publisher</label>
+						    	<select class="form-control" name="publisher" id="publisher">
+						    		<c:forEach var="publisher" items="${publishers }">
+						    			<option value="${publisher.id }" label="${publisher.name }"/>
+						    		</c:forEach>
+						    	</select>
+						  	</div>
+						  	<div class="form-group col-md-6">
+						    	<label>Category</label>
+						    	<select class="form-control" name="category" id="category">
+						    		<c:forEach var="shelf" items="${shelfs }">
+						    			<option value="${shelf.id }" label="${shelf.category }"/>
+						    		</c:forEach>
+						    	</select>
+						  	</div>
+						  	<div class="form-group col-md-6">
+						    	<label>Stock</label>
+						    	<input type="hidden" class="form-control" name="bookStockId" id="bookStockId">
+						    	<input type="text" class="form-control" name="bookStock" id="bookStock">
+						  	</div>
+						  	<label> </label>
 						</div>
-						<div class="form-group col-md-6">
-					    	<label>Title</label>
-					    	<input class="form-control" type="text" name="title" id="title"></td>
-						</div>
-						<div class="form-group col-md-6">
-					    	<label>Author</label>
-					    	<input type="text" class="form-control" name="author" id="author">
-					  	</div>
-					  	<div class="form-group col-md-6">
-					    	<label>Released Year</label>
-					    	<input type="text" class="form-control" name="releasedYear" id="releasedYear">
-					  	</div>
-					  	<div class="form-group col-md-6">
-					    	<label>Publisher</label>
-					    	<select class="form-control" name="publisher" id="publisher">
-					    		<c:forEach var="publisher" items="${publishers }">
-					    			<option value="${publisher.id }" label="${publisher.name }"/>
-					    		</c:forEach>
-					    	</select>
-					  	</div>
-					  	<div class="form-group col-md-6">
-					    	<label>Stock</label>
-					    	<input type="hidden" class="form-control" name="bookStockId" id="bookStockId">
-					    	<input type="text" class="form-control" name="bookStock" id="bookStock">
-					  	</div>
-					  	<div class="form-group col-md-6">
-					    	<label>Category</label>
-					    	<select class="form-control" name="category" id="category">
-					    		<c:forEach var="shelf" items="${shelfs }">
-					    			<option value="${shelf.id }" label="${shelf.category }"/>
-					    		</c:forEach>
-					    	</select>
-					  	</div>
-					</div>
 					</form>
 		        </div>
 		        <div class="modal-footer">
-			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			        <button type="button" class="btn btn-primary">Save changes</button>
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        		<button type="button" class="btn btn-primary" id="submit-update">Save changes</button>
 		        </div>
 	        </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
    	</div>
 	
-	<!-- Modal Update -->
-	<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">Update Modal</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	        <form>
-				<div class="form-row">
-			    <div class="form-group col-md-6">
-				    <label>ISBN</label>
-				    <input type="text" class="form-control" name="isbn" id="isbn">
-				</div>
-				<div class="form-group col-md-6">
-			    	<label>Title</label>
-			    	<input class="form-control" type="text" name="title" id="title"></td>
-				</div>
-				<div class="form-group col-md-6">
-			    	<label>Author</label>
-			    	<input type="text" class="form-control" name="author" id="author">
-			  	</div>
-			  	<div class="form-group col-md-6">
-			    	<label>Released Year</label>
-			    	<input type="text" class="form-control" name="releasedYear" id="releasedYear">
-			  	</div>
-			  	<div class="form-group col-md-6">
-			    	<label>Publisher</label>
-			    	<select class="form-control" name="publisher" id="publisher">
-			    		<c:forEach var="publisher" items="${publishers }">
-			    			<option value="${publisher.id }" label="${publisher.name }"/>
-			    		</c:forEach>
-			    	</select>
-			  	</div>
-			  	<div class="form-group col-md-6">
-			    	<label>Stock</label>
-			    	<input type="hidden" class="form-control" name="bookStockId" id="bookStockId">
-			    	<input type="text" class="form-control" name="bookStock" id="bookStock">
-			  	</div>
-			  	<div class="form-group col-md-6">
-			    	<label>Category</label>
-			    	<select class="form-control" name="category" id="category">
-			    		<c:forEach var="shelf" items="${shelfs }">
-			    			<option value="${shelf.id }" label="${shelf.category }"/>
-			    		</c:forEach>
-			    	</select>
-			  	</div>
-			</div>
-			</form>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary" id="submit-update">Save changes</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	
 	<!-- Modal Delete -->
-	<div class="modal fade" id="deleteConfirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">Confirm Delete</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	        Are you sure?
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-	        <button type="button" class="btn btn-primary" id="ok-delete">Yes</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
+	<div class="col-md-12">
+		<div class="modal fade"  id="delete-modal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title">Update Book</h4>
+		        </div>
+		        <div class="modal-body">
+		        	<h4>Are you sure?</h4>
+		        </div>
+		        <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+	        		<button type="button" class="btn btn-primary" id="ok-delete">Yes</button>
+		        </div>
+	        </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+   	</div>
 </body>
 </html>
