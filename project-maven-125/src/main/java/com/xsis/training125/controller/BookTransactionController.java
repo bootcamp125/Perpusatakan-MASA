@@ -15,7 +15,6 @@ import com.xsis.training125.service.BookService;
 import com.xsis.training125.service.BookTransactionService;
 
 @Controller
-@RequestMapping("/borrow_transaction") 
 public class BookTransactionController {
 	
 	@Autowired
@@ -31,12 +30,12 @@ public class BookTransactionController {
 		List<Book> books = bookService.getAllBook();
 		model.addAttribute("books", books);
 
-		return "bookTransaction";
+		return "borrowTransaction";
 	}
 	
 	@RequestMapping(value="/save")
 	public String save(@ModelAttribute BookTransaction bookTransaction) {
 		bookTransactionService.save(bookTransaction);
-		return "redirect:/bookTransaction";
+		return "redirect:/borrowTransaction";
 	}
 }
