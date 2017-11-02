@@ -226,11 +226,11 @@
 			  	</div>
 			  	<div class="form-group col-md-6">
 			    	<label>Category</label>
-			    	<%-- <select class="form-control" name="category" id="category">
+			    	<select class="form-control" name="category" id="category">
 			    		<c:forEach var="shelf" items="${shelfs }">
 			    			<option value="${shelf.id }" label="${shelf.category }"/>
 			    		</c:forEach>
-			    	</select> --%>
+			    	</select>
 			  	</div>
 			</div>
 			</form>
