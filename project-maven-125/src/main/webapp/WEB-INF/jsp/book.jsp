@@ -1,6 +1,3 @@
-<%@page import="com.xsis.training125.model.Book"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +9,7 @@
 
   <!-- plugins -->
   <link rel="stylesheet" type="text/css" href="assets/asset/css/plugins/font-awesome.min.css"/>
+  <link rel="stylesheet" type="text/css" href="assets/asset/css/plugins/simple-line-icons.css"/>
   <link rel="stylesheet" type="text/css" href="assets/asset/css/plugins/datatables.bootstrap.min.css"/>
   <link rel="stylesheet" type="text/css" href="assets/asset/css/plugins/animate.min.css"/>
   <link href="assets/asset/css/style.css" rel="stylesheet">
@@ -84,14 +82,21 @@
                       <h1 class="animated fadeInLeft">21:00</h1>
                       <p class="animated fadeInRight">Sat,October 1st 2029</p>
                     </li>
-                    <li class="active ripple">
-                      <a class="tree-toggle nav-header"><span class="fa-home fa"></span> Dashboard 
-                        <span class="fa-angle-right fa right-arrow text-right"></span>
-                      </a>
-                      <ul class="nav nav-list tree">
-                          <li><a href="dashboard-v1.html">Dashboard v.1</a></li>
-                          <li><a href="dashboard-v2.html">Dashboard v.2</a></li>
-                      </ul>
+                    <li class="active ripple animated fadeInLeft">
+                    	<a class="nav-header" href="book">
+                    		<span class="fa fa-book"></span> Books  
+                    		<span class="fa-angle-right fa right-arrow text-right"></span>
+                    	</a>
+                    </li>
+                    <li class="ripple animated fadeInRight">
+                    	<a class="tree-toggle nav-header">
+                    		<span class="fa fa-money"></span> Rent History 
+                    		<span class="fa-angle-right fa right-arrow text-right"></span>
+                    	</a>
+                    	<ul class="nav nav-list tree">
+	                        <li><a href="rent_history">Book Rent List</a></li>
+	                        <li><a href="handsontable.html">Borrow Book</a></li>
+                      	</ul>
                     </li>
                     <li class="ripple"><a class="tree-toggle nav-header"><span class="fa fa-table"></span> Tables  <span class="fa-angle-right fa right-arrow text-right"></span> </a>
                       <ul class="nav nav-list tree">
@@ -113,7 +118,7 @@
                     <div class="col-md-12">
                         <h3 class="animated fadeInLeft">Book</h3>
                         <p class="animated fadeInDown">
-                          Home <span class="fa-angle-right fa"></span> Book
+                          Book <span class="fa-angle-right fa"></span> List
                         </p>
                     </div>
                   </div>
@@ -121,35 +126,80 @@
               <div class="col-md-12 top-20 padding-0">
                 <div class="col-md-12">
                   <div class="panel">
-                    <div class="panel-heading"><h3>Book List</h3></div>
                     <div class="panel-body">
                       <div class="responsive-table">
+                      
+                      <button class="btn btn-success btn-md add-btn tree-toggle"><span class="fa-plus fa"></span> Add Book </button><br><br>
+                      
+                      <ul class="nav nav-list tree">
+                        <li>
+                        	<form action="book/save" method="POST">
+								<div class="form-row">
+								    <div class="form-group col-md-6">
+									    <label>ISBN</label>
+									    <input type="text" class="form-control" name="isbn">
+									</div>
+									<div class="form-group col-md-6">
+								    	<label>Title</label>
+								    	<input class="form-control" type="text" name="title"></td>
+									</div>
+									<div class="form-group col-md-6">
+								    	<label>Author</label>
+								    	<input type="text" class="form-control" name="author">
+								  	</div>
+								  	<div class="form-group col-md-6">
+								    	<label>Released Year</label>
+								    	<input type="text" class="form-control" name="releasedYear">
+								  	</div>
+								  	<div class="form-group col-md-6">
+								    	<label>Publisher</label>
+								    	<select class="form-control" name="publisher.id">
+								    		<c:forEach var="publisher" items="${publishers }">
+								    			<option value="${publisher.id }" label="${publisher.name }"/>
+								    		</c:forEach>
+								    	</select>
+								  	</div>
+								  	<div class="form-group col-md-6">
+								    	<label>Category</label>
+								    	<select class="form-control" name="shelf.id">
+								    		<c:forEach var="shelf" items="${shelfs }">
+								    			<option value="${shelf.id }" label="${shelf.category }"/>
+								    		</c:forEach>
+								    	</select>
+								  	</div>
+								  	<div class="form-group col-md-6">
+								    	<label>Stock</label>
+								    	<input type="text" class="form-control" name="bookStock.stock">
+								  	</div>
+								  	<div style="float: right;" class="form-group col-md-2">
+								  		<br><br><br><br>
+								  		<button type="submit" class="btn btn-primary form-control">Save</button><br><br><br>
+								    </div>
+								</div>
+							</form>
+                        </li>
+                      </ul>
                       <table id="book-list" class="table table-striped table-bordered" width="100%" cellspacing="0">
 	                      <thead>
 	                        <tr>
-								<th>ISBN</th>
 								<th>Title</th>
 								<th>Author</th>
-								<th>Released Year</th>
 								<th>Publisher</th>
 								<th>Category</th>
-								<th>Stock</th>
-								<th>Action</th>
+								<th style="width: 20%;">Action</th>
 							</tr>
 	                      </thead>
 	                      <tbody>
 	                        <c:forEach var="book" items="${books }">
 								<tr>
-									<td>${book.isbn }</td>
 									<td>${book.title }</td>
 									<td>${book.author }</td>
-									<td>${book.releasedYear }</td>
 									<td>${book.publisher.name }</td>
 									<td>${book.shelf.category }</td>
-									<td>${book.bookStock.stock }</td>
 									<td>
-										<button class="btn btn-warning btn-sm update-btn" data-id="${book.id}">Update</button>
-										<button class="btn btn-danger btn-sm delete-btn" data-id="${book.id}">Delete</button>
+										<button class="btn btn-success btn-sm detail-btn icon-box" data-id="${book.id}" title="Detail"><span class="icons icon-eye"></span></button>&nbsp;
+										<button class="btn btn-warning btn-sm update-btn icon-box" data-id="${book.id}" title="Update"><span class="icons icon-note"></span></button>&nbsp;
+										<button class="btn btn-danger btn-sm delete-btn icon-box" data-id="${book.id}" title="Delete"><span class="icons icon-trash"></span></button>
 									</td>
 								</tr>
 							</c:forEach>
@@ -170,8 +220,6 @@
 	<script src="assets/asset/js/popper.min.js"></script>
 	<script src="assets/asset/js/bootstrap.min.js"></script>
 	
-	
-	
 	<!-- plugins -->
 	<script src="assets/asset/js/plugins/moment.min.js"></script>
 	<script src="assets/asset/js/plugins/jquery.datatables.min.js"></script>
@@ -190,6 +238,37 @@
 	<script type="text/javascript">
 		
 		var id = 0;
+		
+		//detail
+		$(document).ready(function (){
+			$('.detail-btn').on('click',function() {
+				
+				id = $(this).data('id');
+				
+				//ajax retrive data
+				$.ajax({
+					type: 'POST',
+					url: '/book/edit/'+id,
+					success: function(data) {		
+						setField(data);
+					},
+					dataType: 'json'
+				});
+				
+				$('#detail-modal').modal();
+			});
+			
+			function setField(data) {
+				$('#detail-isbn').val(data.isbn);
+				$('#detail-title').val(data.title);
+				$('#detail-author').val(data.author);
+				$('#detail-releasedYear').val(data.releasedYear);
+				$('#detail-publisher').val(data.publisher.name);
+				$('#detail-bookStock').val(data.bookStock.stock);
+				$('#detail-category').val(data.shelf.category);
+			}
+		});
+		
 		
 		//update
 		$(document).ready(function (){
@@ -276,6 +355,65 @@
 		});
 	</script>
 	
+	<!-- Detail Update -->
+	<div class="col-md-12">
+		<div class="modal fade"  id="detail-modal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title">Book Detail</h4>
+		        </div>
+		        <div class="modal-body">
+		        	<form style="margin-top: 3%;">
+						<div class="form-row">
+						    <div class="form-group col-md-6">
+							    <label>ISBN</label>
+							    <input type="text" class="form-control" id="detail-isbn" disabled>
+							</div>
+							<div class="form-group col-md-6">
+						    	<label>Author</label>
+						    	<input type="text" class="form-control" id="detail-author" disabled>
+						  	</div>
+							<div class="form-group" style="margin-left:2.5%; margin-right: 2.5%;">
+						    	<label>Title</label>
+						    	<input class="form-control" type="text" id="detail-title" disabled>
+							</div>
+						  	<div class="form-group col-md-6">
+						    	<label>Released Year</label>
+						    	<input type="text" class="form-control" id="detail-releasedYear" disabled>
+						  	</div>
+						  	<div class="form-group col-md-6">
+						    	<label>Publisher</label>
+						    	<input class="form-control" id="detail-publisher" disabled>
+						    	<%-- <select class="form-control" id="detail-publisher" disabled>
+						    		<c:forEach var="publisher" items="${publishers }">
+						    			<option value="${publisher.id }" label="${publisher.name }"/>
+						    		</c:forEach>
+						    	</select> --%>
+						  	</div>
+						  	<div class="form-group col-md-6">
+						    	<label>Category</label>
+						    	<input class="form-control" id="detail-category" disabled>
+						    	<%-- <select class="form-control" id="detail-category" disabled>
+						    		<c:forEach var="shelf" items="${shelfs }">
+						    			<option value="${shelf.id }" label="${shelf.category }"/>
+						    		</c:forEach>
+						    	</select> --%>
+						  	</div>
+						  	<div class="form-group col-md-6">
+						    	<label>Stock</label>
+						    	<input type="text" class="form-control" id="detail-bookStock" disabled>
+						  	</div>
+						  	<label> </label>
+						</div>
+					</form>
+		        </div>
+	        </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+   	</div>
+	
 	<!-- Modal Update -->
 	<div class="col-md-12">
 		<div class="modal fade"  id="update-modal">
@@ -345,7 +483,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			        <h4 class="modal-title">Update Book</h4>
+			        <h4 class="modal-title">Delete Book</h4>
 		        </div>
 		        <div class="modal-body">
 		        	<h4>Are you sure?</h4>
