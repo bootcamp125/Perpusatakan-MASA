@@ -15,7 +15,7 @@ import com.xsis.training125.service.BookService;
 import com.xsis.training125.service.BookTransactionService;
 
 @Controller
-@RequestMapping("/borrow_transaction")
+@RequestMapping("/borrow_transaction") 
 public class BookTransactionController {
 	
 	@Autowired
