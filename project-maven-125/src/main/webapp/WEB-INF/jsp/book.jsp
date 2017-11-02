@@ -285,7 +285,47 @@
 			        <h4 class="modal-title">Modal title</h4>
 		        </div>
 		        <div class="modal-body">
-		        	<p>One fine body&hellip;</p>
+		        	<form>
+						<div class="form-row">
+					    <div class="form-group col-md-6">
+						    <label>ISBN</label>
+						    <input type="text" class="form-control" name="isbn" id="isbn">
+						</div>
+						<div class="form-group col-md-6">
+					    	<label>Title</label>
+					    	<input class="form-control" type="text" name="title" id="title"></td>
+						</div>
+						<div class="form-group col-md-6">
+					    	<label>Author</label>
+					    	<input type="text" class="form-control" name="author" id="author">
+					  	</div>
+					  	<div class="form-group col-md-6">
+					    	<label>Released Year</label>
+					    	<input type="text" class="form-control" name="releasedYear" id="releasedYear">
+					  	</div>
+					  	<div class="form-group col-md-6">
+					    	<label>Publisher</label>
+					    	<select class="form-control" name="publisher" id="publisher">
+					    		<c:forEach var="publisher" items="${publishers }">
+					    			<option value="${publisher.id }" label="${publisher.name }"/>
+					    		</c:forEach>
+					    	</select>
+					  	</div>
+					  	<div class="form-group col-md-6">
+					    	<label>Stock</label>
+					    	<input type="hidden" class="form-control" name="bookStockId" id="bookStockId">
+					    	<input type="text" class="form-control" name="bookStock" id="bookStock">
+					  	</div>
+					  	<div class="form-group col-md-6">
+					    	<label>Category</label>
+					    	<select class="form-control" name="category" id="category">
+					    		<c:forEach var="shelf" items="${shelfs }">
+					    			<option value="${shelf.id }" label="${shelf.category }"/>
+					    		</c:forEach>
+					    	</select>
+					  	</div>
+					</div>
+					</form>
 		        </div>
 		        <div class="modal-footer">
 			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
