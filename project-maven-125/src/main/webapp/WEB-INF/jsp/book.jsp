@@ -45,7 +45,7 @@
 			  	</div>
 			  	<div class="form-group col-md-6">
 			    	<label>Category</label>
-			    	<select class="form-control" name="category.id">
+			    	<select class="form-control" name="shelf.id">
 			    		<c:forEach var="shelf" items="${shelfs }">
 			    			<option value="${shelf.id }" label="${shelf.category }"/>
 			    		</c:forEach>
@@ -124,7 +124,7 @@
 				$('#publisher').val(data.publisher.id);
 				$('#bookStockId').val(data.bookStock.id);
 				$('#bookStock').val(data.bookStock.stock);
-				//$('#category').val(data.shelf.id);
+				$('#category').val(data.shelf.id);
 			}
 			
 			//submit update
@@ -142,9 +142,9 @@
 						id : $('#bookStockId').val(),
 						stock : $('#bookStock').val()
 					},
-					/* shelf : {
-						id : $('#shelfId').val()
-					} */
+					shelf : {
+						id : $('#category').val()
+					}
 				};
 				
 				// ajax update
@@ -226,7 +226,7 @@
 			  	</div>
 			  	<div class="form-group col-md-6">
 			    	<label>Category</label>
-			    	<select class="form-control" name="category">
+			    	<select class="form-control" name="category" id="category">
 			    		<c:forEach var="shelf" items="${shelfs }">
 			    			<option value="${shelf.id }" label="${shelf.category }"/>
 			    		</c:forEach>
